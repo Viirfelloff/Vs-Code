@@ -1,12 +1,8 @@
-def indivLetterType(String):
-    String = list(String)
-    ran = True
-    Stringnum = len(String)
-    number = 0
-    for x in Stringnum:
-        print(String[number])
-        number += 1
-        if number > Stringnum:
-            break
+import time
 
-indivLetterType("So basically this is a test to see if this works.")
+def IndivType(message):
+    message = " " + message
+    delay = 0.1 # seconds
+    for char in message:
+        print(char, end='', flush=True)  # Print each character without a newline
+        time.sleep(delay)  # Wait for the specified delay before printing the next character
