@@ -1,2 +1,6 @@
-//this ai needa stop pressing me and stop tryna finish my sentences
-console.log("Test");
+console.log("Test")
+let String = null;
+function displayMssage(String) {
+    console.log(String + String)
+}
+displayMssage("sig")
