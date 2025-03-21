@@ -1,6 +1,3 @@
-from contextlib import nullcontext
-from dataclasses import InitVar
-from idlelib.query import Query
 #TODO: ADD SPEED FEATURE
 import random
 import IndivTypeTest
@@ -18,176 +15,170 @@ def game():
                             "a mage, sentinel, assassin, or healer? Assassins are quick and deal damage, sentinels\n" + "have lots of defense, mages have good magic and crit chances, and healers have lots of health.")
     input3 = input(" Choose 1, 2, 3, or 4 for mage, sentinel, assassin, or healer.")
     class assassin:
-        def __init__(self, hlth, atk, defen, magic, crit):
-            chance = random.randint(0, 20)
+        chance = random.randint(0,20)
+        def __init__(self, hlth, atk, defen, magic, crit, magicLeft, DamageDealt, DamageTaken):
             self.hlth = hlth
             self.atk = atk
             self.defen = defen
             self.magic = magic
             self.crit = crit
-            def attack(self):
-                self.crit = assassin.chance
-                DamageDealt = 0
-                magicLeft = 5
-                DamageDealt += self.atk
-                IndivTypeTest.IndivType("Damage Dealt: " + str(DamageDealt))
-                if (self.crit == 3):
-                    DamageDealt += self.crit
-                    IndivTypeTest.IndivType("Critical Hit! Added Damage: " + str(self.crit))
-                else:
-                    DamageDealt += 0
-                input10 = input("Use Magic? Type Y or N. ")
-                if input == "Y":
-                    self.magic = magic * hlth
-                    DamageDealt += self.magic
-                    IndivTypeTest.IndivType(
-                        "Magic Damage Added! Added Damage: " + str(self.magic) + ". " + "Uses remaining: " + str(
-                            magicLeft))
-                elif (magicLeft == 0):
-                    IndivTypeTest.IndivType("No magic left!")
-                else:
-                    IndivTypeTest.IndivType("You choose not to use magic.")
-                return DamageDealt
-            def defense(self):
-                DamageTaken = 0;
-                if (DamageTaken > 0):
-                    DamageTaken += -self.defen
-                    self.hlth += -DamageTaken
-                if (self.hlth <= 0):
-                    IndivTypeTest.IndivType("You are Dead.....")
-                    pregame()
-    class mage:
-        chance2 = random.randint(0,20)
-        def __init__(self, hlth, atk, defen, magic, crit):
-            self.hlth = hlth
-            self.atk = atk
-            self.defen = defen
-            self.magic = magic
-            self.crit = crit
+            self.magicLeft = magicLeft
+            self.DamageDealt = DamageDealt
+            self.DamageTaken = DamageTaken
         def attack(self):
-            self.crit = mage.chance2
-            magicLeft = 5
-            DamageDealt = 0
-            DamageDealt += self.atk
-            IndivTypeTest.IndivType("Damage Dealt: " + str(DamageDealt))
+            self.crit = assassin.chance
+            self.DamageDealt = 0
+            self.DamageDealt += self.atk
+            IndivTypeTest.IndivType("Damage Dealt so far: " + str(self.DamageDealt))
             if (self.crit == 3):
-                DamageDealt += self.crit
+                self.DamageDealt += self.crit
                 IndivTypeTest.IndivType("Critical Hit! Added Damage: " + str(self.crit))
             else:
-                DamageDealt += 0
-            input10 = input("Use Magic? Type Y or N. ")
-            if input == "Y":
-                self.magic = self.magic * self.hlth
-                DamageDealt += self.magic
-                IndivTypeTest.IndivType("Magic Damage Added! Added Damage: " + str(self.magic) + ". " + "Uses remaining: " + str(magicLeft))
-                magicLeft += -1
-            elif (magicLeft == 0):
+                self.DamageDealt += 0
+            input10 = input("Use Magic? Type 1 or 2 for Yes or No.")
+            if self.magicLeft > 0 and input10 == "1":
+                self.DamageDealt += self.magic
+                IndivTypeTest.IndivType("Magic Damage Added! Added Damage: " + str(self.magic) + ". " + "Uses remaining: " + str(self.magicLeft))
+                self.magicLeft += -1
+            elif (self.magicLeft == 0):
                 IndivTypeTest.IndivType("No magic left!")
             else:
                 IndivTypeTest.IndivType("You choose not to use magic.")
-            return DamageDealt
+            return self.DamageDealt
         def defense(self):
-            DamageTaken = 0;
-            if (DamageTaken > 0):
-                DamageTaken += -self.defen
-                self.hlth += -DamageTaken
-            if (self.hlth == 0):
-                IndivTypeTest.IndivType("You are Dead.....")
-                pregame()
+            if (self.DamageTaken > 0):
+                self.DamageTaken += -self.defen
+                self.hlth += -self.DamageTaken
+    class mage:
+        chance2 = random.randint(0,20)
+        def __init__(self, hlth, atk, defen, magic, crit, magicLeft, DamageDealt, DamageTaken):
+            self.hlth = hlth
+            self.atk = atk
+            self.defen = defen
+            self.magic = magic
+            self.crit = crit
+            self.magicLeft = magicLeft
+            self.DamageDealt = DamageDealt
+            self.DamageTaken = DamageTaken
+        def attack(self):
+            self.crit = mage.chance2
+            self.DamageDealt = 0
+            self.DamageDealt += self.atk
+            IndivTypeTest.IndivType("Damage Dealt so far: " + str(self.DamageDealt))
+            if (self.crit == 3):
+                self.DamageDealt += self.crit
+                IndivTypeTest.IndivType("Critical Hit! Added Damage: " + str(self.crit))
+            else:
+                self.DamageDealt += 0
+            input11 = input("Use Magic? Type 1 or 2 for Yes or No.")
+            if self.magicLeft > 0 and input11 == "1":
+                self.DamageDealt += self.magic
+                IndivTypeTest.IndivType("Magic Damage Added! Added Damage: " + str(self.magic) + ". " + "Uses remaining: " + str(self.magicLeft))
+                self.magicLeft += -1
+            elif (self.magicLeft == 0):
+                IndivTypeTest.IndivType("No magic left!")
+            else:
+                IndivTypeTest.IndivType("You choose not to use magic.")
+            return self.DamageDealt
+        def defense(self):
+            if (self.DamageTaken > 0):
+                self.DamageTaken += -self.defen
+                self.hlth += -self.DamageTaken
+
     class sentinel:
-        chance3 = random.randint(0,20)
-        def __init__(self, hlth, atk, defen, magic, crit):
+        chance3 = random.randint(0, 20)
+        def __init__(self, hlth, atk, defen, magic, crit, magicLeft, DamageDealt, DamageTaken):
             self.hlth = hlth
             self.atk = atk
             self.defen = defen
             self.magic = magic
             self.crit = crit
-            def attack(self):
-                self.crit = sentinel.chance3
-                DamageDealt = 0
-                magicLeft = 5
-                DamageDealt += self.atk
-                IndivTypeTest.IndivType("Damage Dealt: " + str(DamageDealt))
-                if (self.crit == 3):
-                    DamageDealt += 5
-                    IndivTypeTest.IndivType("Critical Hit! Added Damage: " + str(self.crit))
-                else:
-                    DamageDealt += 0
-                input = input("Use Magic? Type Y or N. ")
-                if input == "Y":
-                    self.magic = magic * hlth
-                    DamageDealt += self.magic
-                    IndivTypeTest.IndivType(
-                        "Magic Damage Added! Added Damage: " + str(self.magic) + ". " + "Uses remaining: " + str(
-                            magicLeft))
-                elif (magicLeft == 0):
-                    IndivTypeTest.IndivType("No magic left!")
-                else:
-                    IndivTypeTest.IndivType("You choose not to use magic.")
-                return DamageDealt
-            def defense(self):
-                DamageTaken = 0;
-                if (DamageTaken > 0):
-                    DamageTaken += -self.defen
-                    self.hlth += -DamageTaken
-                if (self.hlth == 0):
-                    IndivTypeTest.IndivType("You are Dead.....")
-                    pregame()
+            self.magicLeft = magicLeft
+            self.DamageDealt = DamageDealt
+            self.DamageTaken = DamageTaken
+        def attack(self):
+            self.crit = sentinel.chance3
+            self.DamageDealt = 0
+            self.DamageDealt += self.atk
+            IndivTypeTest.IndivType("Damage Dealt so far: " + str(self.DamageDealt))
+            if (self.crit == 3):
+                self.DamageDealt += self.crit
+                IndivTypeTest.IndivType("Critical Hit! Added Damage: " + str(self.crit))
+            else:
+                self.DamageDealt += 0
+            input12 = input("Use Magic? Type 1 or 2 for Yes or No.")
+            if self.magicLeft > 0 and input12 == "1":
+                self.DamageDealt += self.magic
+                IndivTypeTest.IndivType(
+                    "Magic Damage Added! Added Damage: " + str(self.magic) + ". " + "Uses remaining: " + str(
+                        self.magicLeft))
+                self.magicLeft += -1
+            elif (self.magicLeft == 0):
+                IndivTypeTest.IndivType("No magic left!")
+            else:
+                IndivTypeTest.IndivType("You choose not to use magic.")
+            return self.DamageDealt
+
+        def defense(self):
+            if (self.DamageTaken > 0):
+                self.DamageTaken += -self.defen
+                self.hlth += -self.DamageTaken
+
     class healer:
-        chance4 = random.randint(0,20)
-        def __init__(self, hlth, atk, defen, magic, crit):
+        chance4 = random.randint(0, 20)
+        def __init__(self, hlth, atk, defen, magic, crit, magicLeft, DamageDealt, DamageTaken):
             self.hlth = hlth
             self.atk = atk
             self.defen = defen
             self.magic = magic
             self.crit = crit
-            def attack(self):
-                self.crit = healer.chance4
-                DamageDealt = 0
-                magicLeft = 5
-                DamageDealt += self.atk
-                IndivTypeTest.IndivType("Damage Dealt: " + str(DamageDealt))
-                if (self.crit == 3):
-                    DamageDealt += 5
-                    IndivTypeTest.IndivType("Critical Hit! Added Damage: " + str(self.crit))
-                else:
-                    DamageDealt += 0
-                input = input("Use Magic? Type Y or N. ")
-                if input == "Y":
-                    self.magic = magic * hlth
-                    DamageDealt += self.magic
-                    IndivTypeTest.IndivType(
-                        "Magic Damage Added! Added Damage: " + str(self.magic) + ". " + "Uses remaining: " + str(
-                            magicLeft))
-                elif (magicLeft == 0):
-                    IndivTypeTest.IndivType("No magic left!")
-                else:
-                    IndivTypeTest.IndivType("You choose not to use magic.")
-                return DamageDealt
-            def defense(self):
-                DamageTaken = 0;
-                if (DamageTaken > 0):
-                    DamageTaken += -self.defen
-                    self.hlth += -DamageTaken
-                if (self.hlth == 0):
-                    IndivTypeTest.IndivType("You are Dead.....")
-                    pregame()
+            self.magicLeft = magicLeft
+            self.DamageDealt = DamageDealt
+            self.DamageTaken = DamageTaken
+
+        def attack(self):
+            self.crit = healer.chance4
+            self.DamageDealt = 0
+            self.DamageDealt += self.atk
+            IndivTypeTest.IndivType("Damage Dealt so far: " + str(self.DamageDealt))
+            if (self.crit == 3):
+                self.DamageDealt += self.crit
+                IndivTypeTest.IndivType("Critical Hit! Added Damage: " + str(self.crit))
+            else:
+                self.DamageDealt += 0
+            input13 = input("Use Magic? Type 1 or 2 for Yes or No.")
+            if self.magicLeft > 0 and input13 == "1":
+                self.DamageDealt += self.magic
+                IndivTypeTest.IndivType(
+                    "Magic Damage Added! Added Damage: " + str(self.magic) + ". " + "Uses remaining: " + str(
+                        self.magicLeft))
+                self.magicLeft += -1
+            elif (self.magicLeft == 0):
+                IndivTypeTest.IndivType("No magic left!")
+            else:
+                IndivTypeTest.IndivType("You choose not to use magic.")
+            return self.DamageDealt
+
+        def defense(self):
+            if (self.DamageTaken > 0):
+                self.DamageTaken += -self.defen
+                self.hlth += -self.DamageTaken
     if input3 == "1":
         IndivTypeTest.IndivType("Nice, you chose the mage!")
         playerClass = "mage"
-        player = mage(100, 8, 4, 0.06, 10)
+        player = mage(100, 8, 4, 4, 10, 5, 0, 0)
     elif input3 == "2":
         IndivTypeTest.IndivType("Nice, you chose the sentinel!")
         playerClass = "sentinel"
-        player = sentinel(100, 7, 7, 0.03, 8)
+        player = sentinel(100, 7, 7, 2, 8,5,0,0)
     elif input3 == "3":
         IndivTypeTest.IndivType("Nice, you chose the assassin!")
         playerClass = "assassin"
-        player = assassin(100, 10, 5, 0.01, 7 )
+        player = assassin(100, 10, 5, 1, 7,5,0,0)
     elif input3 == "4":
         IndivTypeTest.IndivType("Nice, you chose the healer!")
         playerClass = "healer"
-        player = healer(120, 4, 7, 0.03, 4)
+        player = healer(120, 4, 7, 3, 4,5,0,0)
     IndivTypeTest.IndivType("You walk forward, and see a forest. Beside the forest, you see an oasis. Where do you go?")
     input4 = input("Type 1 for the forest, and 2 for the Oasis.")
     if input4 == "1":
@@ -211,7 +202,7 @@ def game():
             IndivTypeTest.IndivType("You can choose to use magic 5 times, only. Your attributes are as follows: \n")
             IndivTypeTest.IndivType("Health: " + str(player.hlth) + ", " + "Attack: " + str(player.atk) + ", " + "Defense: " + str(player.defen) + ", " + "\n")
             IndivTypeTest.IndivType("Magic Multiplier: " + str(player.magic) + ", " + "Critical Hit DMG: " + str(player.crit))
-    enemy1 = mage(90, 5, 4, 0.04, 10)
+    enemy1 = mage(90, 5, 4, 3, 10, 5, 0,0)
     IndivTypeTest.IndivType("You are now fighting a nerfed mage! \n Enemy Stats: Health: " + str(enemy1.hlth) + ", " + "Attack: " + str(enemy1.atk))
     IndivTypeTest.IndivType("Defense: " + str(enemy1.defen) + "\n" + ", " + "Magic: " + str(enemy1.magic) + ", " + "Crit: " + str(enemy1.crit) + ".")
     IndivTypeTest.IndivType("Commence Battle!")
@@ -222,9 +213,20 @@ def game():
             randomNum2 = random.randint(1,10)
             if randomNum2 == 7:
                 battleActive = False
+                IndivTypeTest.IndivType("You Escaped!")
+            else:
+                IndivTypeTest.IndivType("You died because you failed to escape....")
+                sleep(2)
+                pregame()
         elif input7 == "A":
             player.attack()
-            enemy1.hlth += -player.DamageDealt
+            enemy1.DamageTaken = player.DamageDealt
+            enemy1.defense()
+            IndivTypeTest.IndivType("You Dealt " + str(enemy1.DamageTaken) + " damage!")
+            IndivTypeTest.IndivType("Enemy Health: " + str(enemy1.hlth) + ".")
+            if enemy1.hlth < 0:
+                IndivTypeTest.IndivType("Congratulations! You defeated the nerfed mage.")
+                battleActive = False
 
 
 

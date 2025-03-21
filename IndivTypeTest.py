@@ -6,3 +6,4 @@ def IndivType(message):
     for char in message:
         print(char, end='', flush=True)  # Print each character without a newline
         time.sleep(delay)  # Wait for the specified delay before printing the next character
+    print()
