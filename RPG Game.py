@@ -27,11 +27,10 @@ def game():
             self.DamageTaken = DamageTaken
 
         def attack(self):
-            self.crit = localchance
             self.DamageDealt = 0
             self.DamageDealt += self.atk
             IndivTypeTest.IndivType("Damage Dealt so far: " + str(self.DamageDealt))
-            if (self.crit == 3):
+            if (localchance == 3):
                 self.DamageDealt += self.crit
                 IndivTypeTest.IndivType("Critical Hit! Added Damage: " + str(self.crit))
             else:
@@ -136,8 +135,9 @@ def game():
                 IndivTypeTest.IndivType("Your Health: " + str(player.hlth) + ".")
                 if player.hlth < 0:
                     IndivTypeTest.IndivType("You died.....")
-                    playerDead = True;
-                    battleActive = False;
+                    playerDead = True
+                    battleActive = False
+                    break
     if playerDead and battleActive == False:
         IndivTypeTest.IndivType("Unfortunately, you died.")
         sleep(3)
