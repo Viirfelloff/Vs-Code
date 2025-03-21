@@ -77,7 +77,7 @@ def game():
     elif input3 == "4":
         IndivTypeTest.IndivType("Nice, you chose the healer!")
         playerClass = "healer"
-        player = healer(120, 4, 7, 3, 4,5,0,0)
+        player = healer(110, 6, 4, 4, 4,5,0,0)
     IndivTypeTest.IndivType("You walk forward, and see a forest. Beside the forest, you see an oasis. Where do you go?")
     input4 = input("Type 1 for the forest, and 2 for the Oasis.")
     if input4 == "1":
@@ -101,40 +101,74 @@ def game():
             IndivTypeTest.IndivType("You can choose to use magic 5 times, only. Your attributes are as follows: \n")
             IndivTypeTest.IndivType("Health: " + str(player.hlth) + ", " + "Attack: " + str(player.atk) + ", " + "Defense: " + str(player.defen) + ", " + "\n")
             IndivTypeTest.IndivType("Magic Multiplier: " + str(player.magic) + ", " + "Critical Hit DMG: " + str(player.crit))
-    enemy1 = mage(90, 5, 4, 3, 10, 5, 0,0)
+    enemy1 = mage(90, 8, 3, 0, 10, 0, 0,0)
     IndivTypeTest.IndivType("You are now fighting a nerfed mage! \n Enemy Stats: Health: " + str(enemy1.hlth) + ", " + "Attack: " + str(enemy1.atk))
     IndivTypeTest.IndivType("Defense: " + str(enemy1.defen) + "\n" + ", " + "Magic: " + str(enemy1.magic) + ", " + "Crit: " + str(enemy1.crit) + ".")
     IndivTypeTest.IndivType("Commence Battle!")
     battleActive = True
-    while battleActive:
-        input7 = input("Your turn! Press A to attack, and B to run (10% chance of escaping).")
-        if input7 == "B":
-            randomNum2 = random.randint(1,10)
-            if randomNum2 == 7:
-                battleActive = False
-                IndivTypeTest.IndivType("You Escaped!")
-            else:
-                IndivTypeTest.IndivType("You died because you failed to escape....")
-                sleep(2)
-                pregame()
-        elif input7 == "A":
-            player.attack()
-            enemy1.DamageTaken = player.DamageDealt
-            enemy1.defense()
-            IndivTypeTest.IndivType("You Dealt " + str(enemy1.DamageTaken) + " damage!")
-            IndivTypeTest.IndivType("Enemy Health: " + str(enemy1.hlth) + ".")
-            if enemy1.hlth < 0:
-                IndivTypeTest.IndivType("Congratulations! You defeated the nerfed mage.")
-                battleActive = False
-            IndivTypeTest.IndivType("Enemy's Turn! They attack!")
-            enemy1.attack()
-            player.DamageTaken = enemy1.DamageDealt
-            player.defense()
-            IndivTypeTest.IndivType("The enemy dealt " + str(player.DamageTaken) + " damage!")
-            IndivTypeTest.IndivType("Your Health: " + str(player.hlth) + ".")
-            if player.hlth < 0:
-                IndivTypeTest.IndivType("You died.....")
-                battleActive = False;
+    if battleActive:
+        while battleActive:
+            input7 = input("Your turn! Press A to attack, and B to run (10% chance of escaping). Enemies have 0 magic, so it doesn't matter what you use for them.")
+            if input7 == "B":
+                randomNum2 = random.randint(1,10)
+                if randomNum2 == 7:
+                    battleActive = False
+                    IndivTypeTest.IndivType("You Escaped!")
+                else:
+                    IndivTypeTest.IndivType("You died because you failed to escape....")
+                    sleep(2)
+                    pregame()
+            elif input7 == "A":
+                playerDead = False;
+                player.attack()
+                enemy1.DamageTaken = player.DamageDealt
+                enemy1.defense()
+                IndivTypeTest.IndivType("You Dealt " + str(enemy1.DamageTaken) + " damage!")
+                IndivTypeTest.IndivType("Enemy Health: " + str(enemy1.hlth) + ".")
+                if enemy1.hlth < 0:
+                    battleActive = False
+                    break
+                IndivTypeTest.IndivType("Enemy's Turn! They attack!")
+                enemy1.attack()
+                player.DamageTaken = enemy1.DamageDealt
+                player.defense()
+                IndivTypeTest.IndivType("The enemy dealt " + str(player.DamageTaken) + " damage!")
+                IndivTypeTest.IndivType("Your Health: " + str(player.hlth) + ".")
+                if player.hlth < 0:
+                    IndivTypeTest.IndivType("You died.....")
+                    playerDead = True;
+                    battleActive = False;
+    if playerDead and battleActive == False:
+        IndivTypeTest.IndivType("Unfortunately, you died.")
+        sleep(3)
+        pregame()
+    if battleActive == False and playerDead == False:
+        IndivTypeTest.IndivType("You defeated the mage!")
+    IndivTypeTest.IndivType("You now receive an upgrade: do you want higher attack, defense, or full health?")
+    input14 = input("Type 1 for the attack, 2 for the defense, or 3 for full health.")
+    if input14 == "1":
+        player.atk += 2
+        IndivTypeTest.IndivType("Your new attack is now " + str(player.atk) + ".")
+    elif input14 == "2":
+        player.defen += 1
+        IndivTypeTest.IndivType("Your new defense is now " + str(player.defen) + ".")
+    elif input14 == "3":
+        player.hlth = 100
+        IndivTypeTest.IndivType("Your new health is now " + str(player.hlth) + ".")
+    IndivTypeTest.IndivType("Would you like to see your current stats?")
+    input15 = input("Type 1 for yes or 2 for no.")
+    if input15 == "1":
+        IndivTypeTest.IndivType("These are your stats:")
+        IndivTypeTest.IndivType(
+            "Health: " + str(player.hlth) + ", " + "Attack: " + str(player.atk) + ", " + "Defense: " + str(
+                player.defen) + ", " + "\n")
+        IndivTypeTest.IndivType(
+            "Magic Multiplier: " + str(player.magic) + ", " + "Critical Hit DMG: " + str(player.crit))
+    else:
+        IndivTypeTest.IndivType("You chose not to see your stats.")
+    IndivTypeTest.IndivType("Let's continue!")
+
+
 
 
 
