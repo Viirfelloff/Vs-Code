@@ -49,9 +49,17 @@ def game():
             return self.DamageDealt
 
         def defense(self):
+            defenseUsed = 0
             if (self.DamageTaken > 0):
-                self.DamageTaken += -self.defen
+                if (defenseUsed < 6):
+                    self.DamageTaken += -self.defen
+                    defenseUsed += 1
+                    IndivTypeTest.IndivType("You used one defense! Number used: " + str(defenseUsed))
+                else:
+                    IndivTypeTest.IndivType("No defense left!")
+                    self.DamageTaken = self.DamageTaken
                 self.hlth += -self.DamageTaken
+
     class mage(character):
         pass
     class sentinel(character):
@@ -60,7 +68,45 @@ def game():
         pass
     class healer(character):
         pass
-
+    class enemy:
+        def __init__(self, hlth, atk, defen, magic, crit, magicLeft, DamageDealt, DamageTaken):
+            self.hlth = hlth
+            self.atk = atk
+            self.defen = defen
+            self.magic = magic
+            self.crit = crit
+            self.magicLeft = magicLeft
+            self.DamageDealt = DamageDealt
+            self.DamageTaken = DamageTaken
+        def attack(self):
+            self.DamageDealt = 0
+            self.DamageDealt += self.atk
+            IndivTypeTest.IndivType("Damage Dealt so far: " + str(self.DamageDealt))
+            if (localchance == 3):
+                self.DamageDealt += self.crit
+                IndivTypeTest.IndivType("Critical Hit! Added Damage: " + str(self.crit))
+            else:
+                self.DamageDealt += 0
+            if self.magicLeft > 0:
+                self.DamageDealt += self.magic
+                IndivTypeTest.IndivType(
+                    "Magic Damage Added! Added Damage: " + str(self.magic) + ". " + "Uses remaining: " + str(
+                        self.magicLeft))
+                self.magicLeft += -1
+            elif (self.magicLeft == 0):
+                IndivTypeTest.IndivType("No magic left!")
+            return self.DamageDealt
+        def defense(self):
+            defenseUsed = 0
+            if (self.DamageTaken > 0):
+                if (defenseUsed < 6):
+                    self.DamageTaken += -self.defen
+                    defenseUsed += 1
+                    IndivTypeTest.IndivType("Enemy used one defense! Number used: " + str(defenseUsed))
+                else:
+                    IndivTypeTest.IndivType("No enemy defense left!")
+                    self.DamageTaken = self.DamageTaken
+                self.hlth += -self.DamageTaken
     if input3 == "1":
         IndivTypeTest.IndivType("Nice, you chose the mage!")
         playerClass = "mage"
@@ -100,14 +146,15 @@ def game():
             IndivTypeTest.IndivType("You can choose to use magic 5 times, only. Your attributes are as follows: \n")
             IndivTypeTest.IndivType("Health: " + str(player.hlth) + ", " + "Attack: " + str(player.atk) + ", " + "Defense: " + str(player.defen) + ", " + "\n")
             IndivTypeTest.IndivType("Magic Multiplier: " + str(player.magic) + ", " + "Critical Hit DMG: " + str(player.crit))
-    enemy1 = mage(90, 8, 3, 0, 10, 0, 0,0)
+    enemy1 = enemy(90, 8, 3, 0, 10, 0, 0,0)
     IndivTypeTest.IndivType("You are now fighting a nerfed mage! \n Enemy Stats: Health: " + str(enemy1.hlth) + ", " + "Attack: " + str(enemy1.atk))
     IndivTypeTest.IndivType("Defense: " + str(enemy1.defen) + "\n" + ", " + "Magic: " + str(enemy1.magic) + ", " + "Crit: " + str(enemy1.crit) + ".")
+    IndivTypeTest.IndivType("Remember - your defense is active for the first 5 attacks you take - it reduces incoming damage!")
     IndivTypeTest.IndivType("Commence Battle!")
     battleActive = True
     if battleActive:
         while battleActive:
-            input7 = input("Your turn! Press A to attack, and B to run (10% chance of escaping). Enemies have 0 magic, so it doesn't matter what you use for them.")
+            input7 = input("Your turn! Press A to attack, and B to run (10% chance of escaping).")
             if input7 == "B":
                 randomNum2 = random.randint(1,10)
                 if randomNum2 == 7:
@@ -124,7 +171,8 @@ def game():
                 enemy1.defense()
                 IndivTypeTest.IndivType("You Dealt " + str(enemy1.DamageTaken) + " damage!")
                 IndivTypeTest.IndivType("Enemy Health: " + str(enemy1.hlth) + ".")
-                if enemy1.hlth < 0:
+                if enemy1.hlth <= 0:
+                    enemy1.hlth = 0
                     battleActive = False
                     break
                 IndivTypeTest.IndivType("Enemy's Turn! They attack!")
@@ -133,7 +181,8 @@ def game():
                 player.defense()
                 IndivTypeTest.IndivType("The enemy dealt " + str(player.DamageTaken) + " damage!")
                 IndivTypeTest.IndivType("Your Health: " + str(player.hlth) + ".")
-                if player.hlth < 0:
+                if player.hlth <= 0:
+                    player.hlth = 0
                     IndivTypeTest.IndivType("You died.....")
                     playerDead = True
                     battleActive = False
@@ -167,21 +216,5 @@ def game():
     else:
         IndivTypeTest.IndivType("You chose not to see your stats.")
     IndivTypeTest.IndivType("Let's continue!")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 pregame()
 
