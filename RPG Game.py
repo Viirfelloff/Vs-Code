@@ -77,6 +77,7 @@ def game():
             self.magicLeft = magicLeft
             self.DamageDealt = DamageDealt
             self.DamageTaken = DamageTaken
+            self.defenseUsed = defenseUsed
         def attack(self):
             self.DamageDealt = 0
             interval = 0
@@ -146,7 +147,7 @@ def game():
             IndivTypeTest.IndivType("You can choose to use magic 5 times, only. Your attributes are as follows: \n")
             IndivTypeTest.IndivType("Health: " + str(player.hlth) + ", " + "Attack: " + str(player.atk) + ", " + "Defense: " + str(player.defen) + ", " + "\n")
             IndivTypeTest.IndivType("Magic Multiplier: " + str(player.magic) + ", " + "Critical Hit DMG: " + str(player.crit))
-    enemy1 = enemy(90, 8, 3, 3, 10, 0, 0,0)
+    enemy1 = enemy(90, 8, 3, 3, 10, 0, 0,0, 0)
     enemyClass = "mage"
     IndivTypeTest.IndivType("You are now fighting a nerfed mage! \n Enemy Stats: Health: " + str(enemy1.hlth) + ", " + "Attack: " + str(enemy1.atk))
     IndivTypeTest.IndivType("Defense: " + str(enemy1.defen) + "\n" + ", " + "Magic: " + str(enemy1.magic) + ", " + "Crit: " + str(enemy1.crit) + ".")
@@ -221,38 +222,35 @@ def game():
     IndivTypeTest.IndivType("Let's continue!")
     IndivTypeTest.IndivType("Note: now, if you want to change your character, press 'y'.")
     input100 = input("Press 'y' to change characters.")
-    def changeCharacter():
-        changeUsed = False
-        if changeUsed == False:
-            input20 = input("What character would you like to switch to? 1 = mage, 2 = sentinel, 3 = assassin, 4 = healer.")
-            if input20 == "1":
-                IndivTypeTest.IndivType("Nice, you chose the mage!")
-                playerClass = "mage"
-                player = mage(100, 8, 4, 4, 10, 5, 0, 0,0)
-            elif input20 == "2":
-                IndivTypeTest.IndivType("Nice, you chose the sentinel!")
-                playerClass = "sentinel"
-                player = sentinel(100, 7, 7, 2, 8, 5, 0, 0,0)
-            elif input20 == "3":
-                IndivTypeTest.IndivType("Nice, you chose the assassin!")
-                playerClass = "assassin"
-                player = assassin(100, 10, 4, 1, 7, 5, 0, 0,0)
-            elif input20 == "4":
-                IndivTypeTest.IndivType("Nice, you chose the healer!")
-                playerClass = "healer"
-                player = healer(110, 6, 4, 4, 4, 5, 0, 0,0)
-            IndivTypeTest.IndivType("You have now used your one character change.")
-            IndivTypeTest.IndivType("Your new stats:")
-            IndivTypeTest.IndivType(
-                "Health: " + str(player.hlth) + ", " + "Attack: " + str(player.atk) + ", " + "Defense: " + str(
-                    player.defen) + ", " + "\n")
-            IndivTypeTest.IndivType(
-                "Magic Multiplier: " + str(player.magic) + ", " + "Critical Hit DMG: " + str(player.crit))
-        if input100 == "y" and changeUsed == False:
-            changeCharacter()
-            changeUsed = True
-        else:
-            IndivTypeTest.IndivType("You chose to remain a " + playerClass + ".")
-    changeCharacter()
+    changeUsed = False
+    if input100 == "y" and changeUsed == False:
+        changeUsed = True
+    else:
+        IndivTypeTest.IndivType("You chose to remain a " + playerClass + ".")
+    if changeUsed == True:
+        input20 = input("What character would you like to switch to? 1 = mage, 2 = sentinel, 3 = assassin, 4 = healer.")
+        if input20 == "1":
+            IndivTypeTest.IndivType("Nice, you chose the mage!")
+            playerClass = "mage"
+            player = mage(100, 8, 4, 4, 10, 5, 0, 0,0)
+        elif input20 == "2":
+            IndivTypeTest.IndivType("Nice, you chose the sentinel!")
+            playerClass = "sentinel"
+            player = sentinel(100, 7, 7, 2, 8, 5, 0, 0,0)
+        elif input20 == "3":
+            IndivTypeTest.IndivType("Nice, you chose the assassin!")
+            playerClass = "assassin"
+            player = assassin(100, 10, 4, 1, 7, 5, 0, 0,0)
+        elif input20 == "4":
+            IndivTypeTest.IndivType("Nice, you chose the healer!")
+            playerClass = "healer"
+            player = healer(110, 6, 4, 4, 4, 5, 0, 0,0)
+        IndivTypeTest.IndivType("You have now used your one character change.")
+        IndivTypeTest.IndivType("Your new stats:")
+        IndivTypeTest.IndivType(
+            "Health: " + str(player.hlth) + ", " + "Attack: " + str(player.atk) + ", " + "Defense: " + str(
+                player.defen) + ", " + "\n")
+        IndivTypeTest.IndivType(
+            "Magic Multiplier: " + str(player.magic) + ", " + "Critical Hit DMG: " + str(player.crit))
     IndivTypeTest.IndivType("You're really tired now. You continue on from the Oasis. The island is huge.")
 pregame()
