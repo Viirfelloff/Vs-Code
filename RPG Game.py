@@ -295,6 +295,15 @@ def game():
                     IndivTypeTest.IndivType("They inject you with a lethal poision. Game over!")
                 elif input69420 == "2":
                     IndivTypeTest.IndivType("You refuse their care and leave.")
+                witchVisited = True
+                IndivTypeTest.IndivType("Now, you go to the witch.")
+                IndivTypeTest.IndivType("You walk into a witch's cove, and she offers you a potion...do you drink it?")
+                inp69 = input("1 for Yes, 2 for No.")
+                if inp69 == "1":
+                    player.magic += 2
+                    IndivTypeTest.IndivType("You get 2 more magic power! Your new magic: " + str(player.magic))
+                elif inp69 == "2":
+                    IndivTypeTest.IndivType("You choose not to drink it.")
             elif input69 == "3":
                 witchVisited = True
                 IndivTypeTest.IndivType("You walk into a witch's cove, and she offers you a potion...do you drink it?")
@@ -304,6 +313,15 @@ def game():
                     IndivTypeTest.IndivType("You get 2 more magic power! Your new magic: " + str(player.magic))
                 elif inp69 == "2":
                     IndivTypeTest.IndivType("You choose not to drink it.")
+                hosVisited = True
+                IndivTypeTest.IndivType("Now, you go to the hospital.")
+                IndivTypeTest.IndivType("You enter the hospital. Patients are lying down, and doctors tend to them.")
+                IndivTypeTest.IndivType("They approach you, and ask if you want to be treated!")
+                input69420 = input("Do you want to accept? 1 for yes, 2 for no.")
+                if input69420 == "1":
+                    IndivTypeTest.IndivType("They inject you with a lethal poision. Game over!")
+                elif input69420 == "2":
+                    IndivTypeTest.IndivType("You refuse their care and leave.")
         elif input2343 == "2":
             hosVisited = True
             IndivTypeTest.IndivType("You enter the hospital. Patients are lying down, and doctors tend to them.")
@@ -330,6 +348,15 @@ def game():
                     player.magicLeft = 5
                     IndivTypeTest.IndivType("You replenished your magic! You now have 5 uses left.")
                 IndivTypeTest.IndivType("You exit the shop.")
+                witchVisited = True
+                IndivTypeTest.IndivType("Now, you go to the witch.")
+                IndivTypeTest.IndivType("You walk into a witch's cove, and she offers you a potion...do you drink it?")
+                inp69 = input("1 for Yes, 2 for No.")
+                if inp69 == "1":
+                    player.magic += 2
+                    IndivTypeTest.IndivType("You get 2 more magic power! Your new magic: " + str(player.magic))
+                elif inp69 == "2":
+                    IndivTypeTest.IndivType("You choose not to drink it.")
             elif input693 == "3":
                 witchVisited = True
                 IndivTypeTest.IndivType("You walk into a witch's cove, and she offers you a potion...do you drink it?")
@@ -339,6 +366,24 @@ def game():
                     IndivTypeTest.IndivType("You get 2 more magic power! Your new magic: " + str(player.magic))
                 elif inp69 == "2":
                     IndivTypeTest.IndivType("You choose not to drink it.")
+                shopVisited = True
+                IndivTypeTest.IndivType("You go to the shop.")
+                IndivTypeTest.IndivType(
+                    "You walk toward the open shop. It looks like they are selling defense boosts, attack boosts, or magic use replenishes.")
+                input21canudosumfurmeeee = input(
+                    "You can buy one thing - 1 for defense, 2 for attack, 3 for magic.")
+                if input21canudosumfurmeeee == "1":
+                    player.defen += 2
+                    IndivTypeTest.IndivType(
+                        "You bought the defense! Added defense: 2! New defense: " + str(player.defen))
+                elif input21canudosumfurmeeee == "2":
+                    player.hlth += 5
+                    IndivTypeTest.IndivType(
+                        "You bought the attack! Added attack: 2! New attack: " + str(player.atk))
+                elif input21canudosumfurmeeee == "3":
+                    player.magicLeft = 5
+                    IndivTypeTest.IndivType("You replenished your magic! You now have 5 uses left.")
+                IndivTypeTest.IndivType("You exit the shop.")
         elif input2343 == "3":
             witchVisited = True
             IndivTypeTest.IndivType("You walk into a witch's cove, and she offers you a potion...do you drink it?")
@@ -365,6 +410,15 @@ def game():
                     player.magicLeft = 5
                     IndivTypeTest.IndivType("You replenished your magic! You now have 5 uses left.")
                 IndivTypeTest.IndivType("You exit the shop.")
+                hosVisited = True
+                IndivTypeTest.IndivType("Now, you go to the hospital.")
+                IndivTypeTest.IndivType("You enter the hospital. Patients are lying down, and doctors tend to them.")
+                IndivTypeTest.IndivType("They approach you, and ask if you want to be treated!")
+                input69420 = input("Do you want to accept? 1 for yes, 2 for no.")
+                if input69420 == "1":
+                    IndivTypeTest.IndivType("They inject you with a lethal poision. Game over!")
+                elif input69420 == "2":
+                    IndivTypeTest.IndivType("You refuse their care and leave.")
             elif input697 == "2":
                 hosVisited = True
                 IndivTypeTest.IndivType("You enter the hospital. Patients are lying down, and doctors tend to them.")
@@ -374,6 +428,22 @@ def game():
                     IndivTypeTest.IndivType("They inject you with a lethal poision. Game over!")
                 elif input69420 == "2":
                     IndivTypeTest.IndivType("You refuse their care and leave.")
+                IndivTypeTest.IndivType("Now, you go to the shop.")
+                shopVisited = True
+                IndivTypeTest.IndivType(
+                    "You walk toward the open shop. It looks like they are selling defense boosts, attack boosts, or magic use replenishes.")
+                input213 = input("You can buy one thing - 1 for defense, 2 for attack, 3 for magic.")
+                if input213 == "1":
+                    player.defen += 2
+                    IndivTypeTest.IndivType(
+                        "You bought the defense! Added defense: 2! New defense: " + str(player.defen))
+                elif input213 == "2":
+                    player.hlth += 5
+                    IndivTypeTest.IndivType("You bought the attack! Added attack: 2! New attack: " + str(player.atk))
+                elif input213 == "3":
+                    player.magicLeft = 5
+                    IndivTypeTest.IndivType("You replenished your magic! You now have 5 uses left.")
+                IndivTypeTest.IndivType("You exit the shop.")
     if input2334 == "1":
         villageMenu()
         IndivTypeTest.IndivType("You leave the village.")
@@ -382,7 +452,7 @@ def game():
     IndivTypeTest.IndivType("Now, you keep walking, and see a cave.")
     IndivTypeTest.IndivType("The cave is dark, with not much light, and you can hear faint sounds coming from inside...")
     sleep(3)
-    input324 = input("1 for Yes, 2 for No.")
+    input324 = input("Do you enter? 1 for Yes, 2 for No.")
     if input324 == "1":
         IndivTypeTest.IndivType("You walk in, unsure of your fate...")
     elif input324 == "2":
