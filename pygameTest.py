@@ -4,8 +4,10 @@ from pygame.locals import *
 import sys
 import random
 import time
+import math
 
 import IndivTypeTest
+from pgame import enemy_speed
 
 # Initialize pygame
 # TODO: add animation mechanic looping thru frames.
@@ -153,7 +155,7 @@ def lvl1():
         #2nd collison detection checker
         if score >= 3:
             display.blit(obstacle1, (x2, y2))
-            obstacle1Col = pygame.Rect(x2, y2, 47, 47)
+            obstacle1Col = pygame.Rect(x2, y2, 110, 110)
             if playerCollision.colliderect(obstacle1Col):
                 print()
                 print("Game Over! You Died!")
@@ -163,7 +165,7 @@ def lvl1():
                 break
             if score >= 5:
                 display.blit(obstacle2, (x3, y3))
-                obstacle2Col = pygame.Rect(x3, y3, 47, 47)
+                obstacle2Col = pygame.Rect(x3, y3, 110, 110)
                 if playerCollision.colliderect(obstacle2Col):
                     print()
                     print("Game Over! You Died!")
@@ -173,7 +175,7 @@ def lvl1():
                     break
                 if score >= 6:
                     display.blit(obstacle3, (x4,y4))
-                    obstacle3Col = pygame.Rect(x4, y4, 47, 47)
+                    obstacle3Col = pygame.Rect(x4, y4, 110, 110)
                     if playerCollision.colliderect(obstacle3Col):
                         print()
                         print("Game Over! You Died!")
@@ -183,7 +185,7 @@ def lvl1():
                         break
                     if score >= 7:
                         display.blit(obstacle4, (x5, y5))
-                        obstacle4Col = pygame.Rect(x5, y5,47, 47)
+                        obstacle4Col = pygame.Rect(x5, y5,110,110)
                         if playerCollision.colliderect(obstacle4Col):
                             print()
                             print("Game Over! You Died!")
@@ -192,24 +194,36 @@ def lvl1():
                             running = False
                             break
                         if score >= 8:
-                            chasing = True
-                            while chasing:
-                                x2 += 3
-                                sleep(0.1)
-                                y2 += 3
-                                sleep(0.1)
-                                x3 += 3
-                                sleep(0.1)
-                                y3 += 3
-                                sleep(0.1)
-                                x4 += 3
-                                sleep(0.1)
-                                y4 += 3
-                                sleep(0.1)
-                                x5 += 3
-                                sleep(0.1)
-                                y5 += 3
-                                sleep(0.1)
+                            distance1x = x2-x1
+                            distance1y= y2-y1
+                            distance2x = x3-x1
+                            distance2y= y3-y1
+                            distance3x = x4-x1
+                            distance3y= y4-y1
+                            distance4x = x5-x1
+                            distance4y= y5-y1
+                            distance1 = math.sqrt(distance1x * distance1x + distance1y * distance1y)
+                            distance2 = math.sqrt(distance2x * distance2x + distance2y * distance2y)
+                            distance3 = math.sqrt(distance3x * distance3x + distance3y * distance3y)
+                            distance4 = math.sqrt(distance4x * distance4x + distance4y * distance4y)
+                            enemy_speed = 2
+                            if distance1 != 0 or distance2 != 0 or distance3 != 0 or distance4 != 0:
+                                distance1x = distance1x / distance1
+                                distance2x = distance2x / distance2
+                                distance3x = distance3x / distance3
+                                distance4x = distance4x / distance4
+                                distance1y = distance1y / distance1
+                                distance2y = distance2y / distance2
+                                distance3y = distance3y / distance3
+                                distance4y = distance4y / distance4
+                                x2 += distance1x * enemy_speed
+                                x3 += distance2x * enemy_speed
+                                x4 += distance3x * enemy_speed
+                                x5 += distance4x * enemy_speed
+                                y2 += distance1y * enemy_speed
+                                y3 += distance2y * enemy_speed
+                                y4 += distance3y * enemy_speed
+                                y5 += distance4y * enemy_speed
         pygame.display.update() # Update display
-IndivTypeTest.IndivType("Welcome to a Coin Game! Try to collect as many coins as possible, before the time runs out! Avoid the bombs!")
+# IndivTypeTest.IndivType("Welcome to a Coin Game! Try to collect as many coins as possible, before the time runs out! Avoid the bombs!")
 lvl1()
