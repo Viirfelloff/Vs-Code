@@ -7,19 +7,19 @@ import time
 import math
 
 import IndivTypeTest
-from pgame import enemy_speed
-
 # Initialize pygame
 # TODO: add animation mechanic looping thru frames.
 pygame.init()
 pygame.display.set_caption("Coin Game")
 length, width = 500, 500
 display = pygame.display.set_mode((length, width))
+obstacleSize1 = 46.6
+obstacleSize2 = 46.6
 # Load images
 def lvl1():
     try:
         player = pygame.image.load("player.png")
-        player = pygame.transform.scale(player, (75,75))
+        player = pygame.transform.scale(player, (25,25))
         coin = pygame.image.load("coin.png")
         coin = pygame.transform.scale(coin, (50,50))
         obstacle1 = pygame.image.load("bomb.png")
@@ -84,13 +84,13 @@ def lvl1():
             x1 = 0
         if y1 < 0:
             y1 = 0
-        if x1 > 400:
-            x1 = 400
-        if y1 > 400:
-            y1 = 400
+        if x1 > 470:
+            x1 = 470
+        if y1 > 470:
+            y1 = 470
         # drawing objects
         # collision boxes
-        playerCollision = pygame.Rect(x1, y1, 75, 75)
+        playerCollision = pygame.Rect(x1, y1, 25, 25)
         coinCollision = pygame.Rect(x, y, 50, 50)
         # right up
         # DRAW OBSTACLE COLLISIONS HERE
@@ -100,6 +100,8 @@ def lvl1():
             last_x1, last_y1 = x1, y1  # Update previous position
         if playerCollision.colliderect(coinCollision):
             score += 1
+            x = random.randint(0, 400)
+            y = random.randint(0, 400)
             diffx = x1 - x
             diffy = y1 - y
             if diffx < 10 and diffx > 0:
@@ -150,12 +152,10 @@ def lvl1():
                 y += 60
             if diffyObst4 > -10 and diffyObst4 < 0:
                 y += -60
-            x = random.randint(0,400)
-            y = random.randint(0,400)
         #2nd collison detection checker
         if score >= 3:
             display.blit(obstacle1, (x2, y2))
-            obstacle1Col = pygame.Rect(x2, y2, 110, 110)
+            obstacle1Col = pygame.Rect(x2, y2, obstacleSize1, obstacleSize2)
             if playerCollision.colliderect(obstacle1Col):
                 print()
                 print("Game Over! You Died!")
@@ -165,7 +165,7 @@ def lvl1():
                 break
             if score >= 5:
                 display.blit(obstacle2, (x3, y3))
-                obstacle2Col = pygame.Rect(x3, y3, 110, 110)
+                obstacle2Col = pygame.Rect(x3, y3, obstacleSize1, obstacleSize2)
                 if playerCollision.colliderect(obstacle2Col):
                     print()
                     print("Game Over! You Died!")
@@ -175,7 +175,7 @@ def lvl1():
                     break
                 if score >= 6:
                     display.blit(obstacle3, (x4,y4))
-                    obstacle3Col = pygame.Rect(x4, y4, 110, 110)
+                    obstacle3Col = pygame.Rect(x4, y4, obstacleSize1, obstacleSize2)
                     if playerCollision.colliderect(obstacle3Col):
                         print()
                         print("Game Over! You Died!")
@@ -185,7 +185,7 @@ def lvl1():
                         break
                     if score >= 7:
                         display.blit(obstacle4, (x5, y5))
-                        obstacle4Col = pygame.Rect(x5, y5,110,110)
+                        obstacle4Col = pygame.Rect(x5, y5,obstacleSize1,obstacleSize2)
                         if playerCollision.colliderect(obstacle4Col):
                             print()
                             print("Game Over! You Died!")
@@ -194,14 +194,14 @@ def lvl1():
                             running = False
                             break
                         if score >= 8:
-                            distance1x = x2-x1
-                            distance1y= y2-y1
-                            distance2x = x3-x1
-                            distance2y= y3-y1
-                            distance3x = x4-x1
-                            distance3y= y4-y1
-                            distance4x = x5-x1
-                            distance4y= y5-y1
+                            distance1x = x1-x2
+                            distance1y= y1-y2
+                            distance2x = x1-x3
+                            distance2y= y1-y3
+                            distance3x = x1-x4
+                            distance3y= y1-y4
+                            distance4x = x1-x5
+                            distance4y= y1-y5
                             distance1 = math.sqrt(distance1x * distance1x + distance1y * distance1y)
                             distance2 = math.sqrt(distance2x * distance2x + distance2y * distance2y)
                             distance3 = math.sqrt(distance3x * distance3x + distance3y * distance3y)
@@ -225,5 +225,4 @@ def lvl1():
                                 y4 += distance3y * enemy_speed
                                 y5 += distance4y * enemy_speed
         pygame.display.update() # Update display
-# IndivTypeTest.IndivType("Welcome to a Coin Game! Try to collect as many coins as possible, before the time runs out! Avoid the bombs!")
 lvl1()
