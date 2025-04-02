@@ -47,7 +47,7 @@ def lvl1():
 
     # Clock for frame rate control
     clock = pygame.time.Clock()
-    time = 80000000000000000
+    time = 1000
     score = 0
     # Game loop
     last_x1, last_y1 = x1, y1
