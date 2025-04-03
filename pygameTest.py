@@ -13,7 +13,7 @@ pygame.init()
 pygame.display.set_caption("Coin Game")
 length, width = 500, 500
 display = pygame.display.set_mode((length, width))
-obstacleSize1 = 46.6
+obstacleSize1 = 45
 obstacleSize2 = 46.6
 # Load images
 def lvl1():
@@ -47,7 +47,7 @@ def lvl1():
 
     # Clock for frame rate control
     clock = pygame.time.Clock()
-    time = 1000
+    time = 1000 * 2
     score = 0
     # Game loop
     last_x1, last_y1 = x1, y1
@@ -152,6 +152,14 @@ def lvl1():
                 y += 60
             if diffyObst4 > -10 and diffyObst4 < 0:
                 y += -60
+            if x < 0:
+                x = 0
+            if y < 0:
+                y = 0
+            if x > 470:
+                x = 470
+            if y > 470:
+                y = 470
         #2nd collison detection checker
         if score >= 3:
             display.blit(obstacle1, (x2, y2))
