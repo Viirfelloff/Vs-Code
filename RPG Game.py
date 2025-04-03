@@ -11,7 +11,6 @@ def pregame():
     IndivTypeTest.IndivType("Welcome," + name + "!")
     game()
 def game():
-    IndivTypeTest.IndivType("The game has now started!")
     sleep(1)
     IndivTypeTest.IndivType("Now for some backstory: you are stranded on an island, with nowhere to go.\n" + "Now, you must choose: do you want to be\n" +
                             "a mage, sentinel, assassin, or healer? Assassins are quick and deal damage, sentinels\n" + "have lots of defense, mages have good magic and crit chances, and healers have lots of health.")
@@ -457,4 +456,5 @@ def game():
         IndivTypeTest.IndivType("You walk in, unsure of your fate...")
     elif input324 == "2":
         IndivTypeTest.IndivType("Stop being a pussy. You go in, unsure of your fate...")
+        sound.play()
 pregame()

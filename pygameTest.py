@@ -15,6 +15,17 @@ length, width = 500, 500
 display = pygame.display.set_mode((length, width))
 obstacleSize1 = 45
 obstacleSize2 = 46.6
+global level
+def playMusic(track):
+    pygame.mixer.init()
+    pygame.mixer.stop()
+    pygame.mixer.music.load(track)
+    pygame.mixer.music.play(-1)  # -1 makes it loop forever
+level = True
+if level:
+    playMusic("music.mp3")
+
+
 # Load images
 def lvl1():
     try:
@@ -43,11 +54,9 @@ def lvl1():
     x4,y4 = 325,335 # right down
     x5,y5 = 325,50 # right up
     x, y = 450, 450
-
-
     # Clock for frame rate control
     clock = pygame.time.Clock()
-    time = 1000 * 2
+    time = 1000 * 3
     score = 0
     # Game loop
     last_x1, last_y1 = x1, y1
@@ -201,6 +210,8 @@ def lvl1():
                             print("Score: " + str(score))
                             running = False
                             break
+                        if score == 8:
+                            playMusic("epic.mp3")
                         if score >= 8:
                             distance1x = x1-x2
                             distance1y= y1-y2
