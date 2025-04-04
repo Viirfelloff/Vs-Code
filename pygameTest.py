@@ -14,7 +14,7 @@ pygame.display.set_caption("Coin Game")
 length, width = 500, 500
 display = pygame.display.set_mode((length, width))
 obstacleSize1 = 45
-obstacleSize2 = 46.6
+obstacleSize2 = 45
 global level
 def playMusic(track):
     pygame.mixer.init()
