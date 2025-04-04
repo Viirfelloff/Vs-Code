@@ -21,10 +21,11 @@ def playMusic(track):
     pygame.mixer.stop()
     pygame.mixer.music.load(track)
     pygame.mixer.music.play(-1)  # -1 makes it loop forever
-level = True
-if level:
-    playMusic("music.mp3")
-
+playMusic("chill.mp3")
+def playSound(track2):
+    pygame.mixer.init()
+    sound = pygame.mixer.Sound(track2)
+    sound.play()
 
 # Load images
 def lvl1():
@@ -108,6 +109,7 @@ def lvl1():
             sys.stdout.flush()
             last_x1, last_y1 = x1, y1  # Update previous position
         if playerCollision.colliderect(coinCollision):
+            playSound("coin.mp3")
             score += 1
             x = random.randint(0, 400)
             y = random.randint(0, 400)
