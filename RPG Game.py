@@ -166,7 +166,7 @@ def game():
                         sleep(2)
                         pregame()
                 elif input7 == "A":
-                    playerDead = False;
+                    playerDead = False
                     player.attack()
                     enemy1.DamageTaken = player.DamageDealt
                     enemy1.defense()
@@ -456,5 +456,4 @@ def game():
         IndivTypeTest.IndivType("You walk in, unsure of your fate...")
     elif input324 == "2":
         IndivTypeTest.IndivType("Stop being a pussy. You go in, unsure of your fate...")
-        sound.play()
 pregame()
