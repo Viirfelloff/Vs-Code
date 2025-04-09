@@ -21,27 +21,29 @@ def playMusic(track):
     pygame.mixer.stop()
     pygame.mixer.music.load(track)
     pygame.mixer.music.play(-1)  # -1 makes it loop forever
-playMusic("chill.mp3")
 def playSound(track2):
     pygame.mixer.init()
     sound = pygame.mixer.Sound(track2)
     sound.play()
-
+playMusic("chill-vibes-322180.mp3")
+display.fill((0,0,0))
 # Load images
 def lvl1():
     try:
-        player = pygame.image.load("player.png")
+        back = pygame.image.load("moni.jpg")
+        back = pygame.transform.scale(back,(length, width))
+        player = pygame.image.load("Screenshot 2025-04-09 155509.png")
         player = pygame.transform.scale(player, (25,25))
         coin = pygame.image.load("coin.png")
         coin = pygame.transform.scale(coin, (50,50))
-        obstacle1 = pygame.image.load("bomb.png")
-        obstacle1 = pygame.transform.scale(obstacle1, (110, 110))
-        obstacle2 = pygame.image.load("bomb2.png")
-        obstacle2 = pygame.transform.scale(obstacle2, (110, 110))
-        obstacle3 = pygame.image.load("bomb3.png")
-        obstacle3 = pygame.transform.scale(obstacle3, (110, 110))
-        obstacle4 = pygame.image.load("bomb4.png")
-        obstacle4 = pygame.transform.scale(obstacle4, (110, 110))
+        obstacle1 = pygame.image.load("enemyyyyuyrge.png")
+        obstacle1 = pygame.transform.scale(obstacle1, (500, 500))
+        obstacle2 = pygame.image.load("augh.png")
+        obstacle2 = pygame.transform.scale(obstacle2, (500, 500))
+        obstacle3 = pygame.image.load("augh2.png")
+        obstacle3 = pygame.transform.scale(obstacle3, (500, 500))
+        obstacle4 = pygame.image.load("augh3.png")
+        obstacle4 = pygame.transform.scale(obstacle4, (500, 500))
         # DEFINE OBSTACLE IMAGES HERE
     except pygame.error as e:
         print(f"Error loading images: {e}")
@@ -50,14 +52,6 @@ def lvl1():
     # Initialize positions
     #placeholder
     x1, y1 = 200, 200
-    col1x = 110
-    col1y = 325
-    col2x = 115
-    col2y = 85
-    col3x = 370
-    col3y = 370
-    col4x = 370
-    col4y = 85
     x2, y2 = 70,290 # left down
     x3, y3 = 70,55 # left up
     x4,y4 = 325,335 # right down
@@ -80,7 +74,8 @@ def lvl1():
             print("Score: " + str(score))
             running = False
             break
-        display.fill((0, 175, 0))  # Clear screen
+        # Clear screen
+        display.blit(back, (0,0))
         display.blit(player, (x1, y1))  # Draw player
         display.blit(coin, (x, y))  # Draw coin
         # Handle events
@@ -182,7 +177,7 @@ def lvl1():
         #2nd collison detection checker
         if score >= 3:
             display.blit(obstacle1, (x2, y2))
-            obstacle1Col = pygame.Rect(col1x, col1y, obstacleSize1, obstacleSize2)
+            obstacle1Col = pygame.Rect(x2, y2, obstacleSize1, obstacleSize2)
             if playerCollision.colliderect(obstacle1Col):
                 print()
                 print("Game Over! You Died!")
@@ -192,7 +187,7 @@ def lvl1():
                 break
             if score >= 5:
                 display.blit(obstacle2, (x3, y3))
-                obstacle2Col = pygame.Rect(col2x, col2y, obstacleSize1, obstacleSize2)
+                obstacle2Col = pygame.Rect(x3, y3, obstacleSize1, obstacleSize2)
                 if playerCollision.colliderect(obstacle2Col):
                     print()
                     print("Game Over! You Died!")
@@ -202,7 +197,7 @@ def lvl1():
                     break
                 if score >= 6:
                     display.blit(obstacle3, (x4,y4))
-                    obstacle3Col = pygame.Rect(col3x, col3y, obstacleSize1, obstacleSize2)
+                    obstacle3Col = pygame.Rect(x4, y4, obstacleSize1, obstacleSize2)
                     if playerCollision.colliderect(obstacle3Col):
                         print()
                         print("Game Over! You Died!")
@@ -212,7 +207,7 @@ def lvl1():
                         break
                     if score >= 7:
                         display.blit(obstacle4, (x5, y5))
-                        obstacle4Col = pygame.Rect(col4x, col4y,obstacleSize1,obstacleSize2)
+                        obstacle4Col = pygame.Rect(x5, y5,obstacleSize1,obstacleSize2)
                         if playerCollision.colliderect(obstacle4Col):
                             print()
                             print("Game Over! You Died!")
@@ -253,35 +248,5 @@ def lvl1():
                                 y3 += distance2y * enemy_speed
                                 y4 += distance3y * enemy_speed
                                 y5 += distance4y * enemy_speed
-                            distancecol1x = x1 - col1x
-                            distancecol1y = y1 - col1y
-                            distancecol2x = x1 - col2x
-                            distancecol2y = y1 - col2y
-                            distancecol3x = x1 - col3x
-                            distancecol3y = y1 - col3y
-                            distancecol4x = x1 - col4x
-                            distancecol4y = y1 - col4y
-                            distancecol1 = math.sqrt(distancecol1x * distancecol1x + distancecol1y * distancecol1y)
-                            distancecol2 = math.sqrt(distancecol2x * distancecol2x + distancecol2y * distancecol2y)
-                            distancecol3 = math.sqrt(distancecol3x * distancecol3x + distancecol3y * distancecol3y)
-                            distancecol4 = math.sqrt(distancecol4x * distancecol4x + distancecol4y * distancecol4y)
-                            enemy_speed = 2
-                            if distancecol1 != 0 or distancecol2 != 0 or distancecol3 != 0 or distancecol4 != 0:
-                                distancecol1x = distancecol1x / distancecol1
-                                distancecol2x = distancecol2x / distancecol2
-                                distancecol3x = distancecol3x / distancecol3
-                                distancecol4x = distancecol4x / distancecol4
-                                distancecol1y = distancecol1y / distancecol1
-                                distancecol2y = distancecol2y / distancecol2
-                                distancecol3y = distancecol3y / distancecol3
-                                distancecol4y = distancecol4y / distancecol4
-                                col1x += distancecol1x * enemy_speed
-                                col2x += distancecol2x * enemy_speed
-                                col3x += distancecol3x * enemy_speed
-                                col4x += distancecol4x * enemy_speed
-                                col1y += distancecol1y * enemy_speed
-                                col2y += distancecol2y * enemy_speed
-                                col3y += distancecol3y * enemy_speed
-                                col4y += distancecol4y * enemy_speed
         pygame.display.update() # Update display
 lvl1()
