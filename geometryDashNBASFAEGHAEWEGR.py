@@ -60,10 +60,6 @@ spikex = 900
 spikey = 310
 spike2x = 940
 spike2y = 310
-spikecolx = spikex
-spikecoly = spikey
-spikecol2x = spike2x
-spikecol2y = spike2y
 global spikeDrawn
 spikeDrawn = False
 global spike2Drawn
@@ -79,7 +75,12 @@ def drawSpikes():
     global spikex, spike2x, movespikeamt #draw and move first spike
     global spikesDrawn
     global score
+    spikecolX = spikex + 8
     spikecol = pygame.Rect(spikex + 8, spikey + 20, 20, 30)
+    pygame.draw.rect(display, (255, 255, 255), spikecol)
+    diff = spikecolX - spikex
+    if diff > 10:
+        spikecolX = spikex + 8
     spikex -= movespikeamt
     if spikex < -50:
         spikex = 900
@@ -95,8 +96,15 @@ def drawSpikes2():
     global movespikeamt
     global spikesDrawn
     global score
-    spike2col = pygame.Rect(spike2x + 8, spike2y + 20, 20, 30)
+    global spikecol2x
+    spikecol2X = spike2x + 8
     spike2x = spikex + 40
+    diff2 = spikecol2X - spike2x
+    spike2col = pygame.Rect(spikecol2X, spike2y + 20, 20, 30)
+    pygame.draw.rect(display, (255, 255, 255), spike2col)
+
+    if diff2 > 10:
+        spikecol2X = spike2x + 8
     if spike2x < -50:
         spike2x = spikex + 40
         score += 1
