@@ -22,6 +22,8 @@ try:
     back = pygame.image.load("geo.jpg")
     player = pygame.image.load("gomeetry ahs.png")
     player = pygame.transform.scale(player, (75, 75))
+    spike2 = pygame.image.load("spike2.png")
+    spike2 = pygame.transform.scale(spike2, (50,50))
     back = pygame.transform.scale(back, (length, width))
 except pygame.error as e:
     print(f"Error loading images: {e}")
@@ -55,29 +57,61 @@ jump_strength = -17
 on_ground = True
 spikex = 900
 spikey = 310
+spike2x = 940
+spike2y = 310
 spikecolx = spikex
 spikecoly = spikey
+spikecol2x = spike2x
+spikecol2y = spike2y
 global spikeDrawn
 spikeDrawn = False
-global control1
-control1 = False
-global control2
-control2 = False
-# Function to draw and move the spike
-def drawSpike(x,y):
-    if spikeDrawn == False:
-        global spikex  # Make spikex a global variable to modify it
-        spikecol = pygame.Rect(x, y, 20,30)
-        x -= 7
-        if x < -50:  # Reset the spike when it's off-screen
-            x = 900
-        if spikecol.colliderect(playerCol):
-            global running
-            running = False
-        display.blit(spike, (x, y))
-    spike_positions = [
+global spike2Drawn
+spike2Drawn = False
+global movespikeamt
+movespikeamt = 7
+global spikesDrawn
+spikesDrawn = 0
 
-    ]
+# Function to draw and move the spike
+
+def drawSpikes():
+    global spikex, spike2x, movespikeamt #draw and move first spike
+    global spikesDrawn
+    spikecol = pygame.Rect(spikex, spikey, 20, 30)
+    spikex -= movespikeamt
+    if spikex < -50:
+        spikex = 900
+        spikesDrawn += 1
+    if spikecol.colliderect(playerCol):
+        global running
+        running = False
+    display.blit(spike, (spikex, spikey))  # <<< This was missing!
+def drawSpikes2():
+    global spike2x# Draw and move second spike
+    global movespikeamt
+    global spikesDrawn
+    spike2col = pygame.Rect(spike2x, spike2y, 20, 30)
+    spike2x = spikex + 40
+    if spike2x < -50:
+        spike2x = 920
+        spikesDrawn += 1
+    if spike2col.colliderect(playerCol):
+        global running
+        running = False
+    display.blit(spike2, (spike2x, spike2y))
+    pygame.display.update()
+global spikesdrawn
+def moveSpike():
+    global spikeDrawn
+    global spike2Drawn
+    global spikesDrawn
+    if spikeDrawn == False:
+        drawSpikes()
+        if spikesDrawn >= 5:
+            drawSpikes2()
+    if spikex <= 0 or spike2x <= 0:
+        spikeDrawn = False
+        spike2Drawn = False
 # Main game loop
 while running:
     clock.tick(60)
@@ -107,5 +141,7 @@ while running:
     display.blit(back, (0, 0))
     display.blit(player, (playerx, playery))
     playerCol = pygame.Rect(playerx, playery, 75,75)
-    drawSpike(spikex, spikey)
+    moveSpike()
+    jump_strength += 0.001
+    movespikeamt += 0.001
     pygame.display.update()
