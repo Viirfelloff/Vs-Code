@@ -14,7 +14,8 @@ pygame.display.set_caption("Geometry Dash Jump Test")
 clock = pygame.time.Clock()
 global running
 running = True
-
+global score
+score =  0
 # Load images
 try:
     spike = pygame.image.load("spike_again-removebg-preview.png")
@@ -77,27 +78,33 @@ spikesDrawn = 0
 def drawSpikes():
     global spikex, spike2x, movespikeamt #draw and move first spike
     global spikesDrawn
+    global score
     spikecol = pygame.Rect(spikex, spikey, 20, 30)
     spikex -= movespikeamt
     if spikex < -50:
         spikex = 900
+        score += 1
         spikesDrawn += 1
     if spikecol.colliderect(playerCol):
         global running
         running = False
-    display.blit(spike, (spikex, spikey))  # <<< This was missing!
+        print("Score: " + str(score))
+    display.blit(spike, (spikex, spikey))
 def drawSpikes2():
     global spike2x# Draw and move second spike
     global movespikeamt
     global spikesDrawn
+    global score
     spike2col = pygame.Rect(spike2x, spike2y, 20, 30)
     spike2x = spikex + 40
     if spike2x < -50:
         spike2x = 920
+        score += 1
         spikesDrawn += 1
     if spike2col.colliderect(playerCol):
         global running
         running = False
+        print("Score: " + str(score))
     display.blit(spike2, (spike2x, spike2y))
     pygame.display.update()
 global spikesdrawn
@@ -142,6 +149,6 @@ while running:
     display.blit(player, (playerx, playery))
     playerCol = pygame.Rect(playerx, playery, 75,75)
     moveSpike()
-    jump_strength += 0.001
-    movespikeamt += 0.001
+    jump_strength += 0.01
+    movespikeamt += 0.01
     pygame.display.update()
