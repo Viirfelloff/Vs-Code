@@ -62,7 +62,7 @@ spikex = 900
 spikey = 310
 spike2x = 940
 spike2y = 310
-spike3x = 970
+spike3x = 980
 spike3y = 310
 global spikeDrawn
 spikeDrawn = False
