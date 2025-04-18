@@ -13,8 +13,8 @@ pygame.init()
 pygame.display.set_caption("Coin Game")
 length, width = 500, 500
 display = pygame.display.set_mode((length, width))
-obstacleSize1 = 40
-obstacleSize2 = 50
+obstacleSize1 = 500
+obstacleSize2 = 500
 global level
 def playMusic(track):
     pygame.mixer.init()
@@ -37,13 +37,13 @@ def lvl1():
         coin = pygame.image.load("coin.png")
         coin = pygame.transform.scale(coin, (50,50))
         obstacle1 = pygame.image.load("enemyyyyuyrge.png")
-        obstacle1 = pygame.transform.scale(obstacle1, (500, 500))
+        obstacle1 = pygame.transform.scale(obstacle1, (obstacleSize1, obstacleSize2))
         obstacle2 = pygame.image.load("augh.png")
-        obstacle2 = pygame.transform.scale(obstacle2, (500, 500))
+        obstacle2 = pygame.transform.scale(obstacle2, (obstacleSize1, obstacleSize1))
         obstacle3 = pygame.image.load("augh2.png")
-        obstacle3 = pygame.transform.scale(obstacle3, (500, 500))
+        obstacle3 = pygame.transform.scale(obstacle3, (obstacleSize1, obstacleSize1))
         obstacle4 = pygame.image.load("augh3.png")
-        obstacle4 = pygame.transform.scale(obstacle4, (500, 500))
+        obstacle4 = pygame.transform.scale(obstacle4, (obstacleSize1, obstacleSize1))
         # DEFINE OBSTACLE IMAGES HERE
     except pygame.error as e:
         print(f"Error loading images: {e}")
@@ -52,7 +52,7 @@ def lvl1():
     # Initialize positions
     #placeholder
     x1, y1 = 200, 200
-    x2, y2 = 70,290 # left down
+    x2, y2 = 105,385 # left down
     x3, y3 = 70,55 # left up
     x4,y4 = 325,335 # right down
     x5,y5 = 325,50 # right up
@@ -177,44 +177,44 @@ def lvl1():
         #2nd collison detection checker
         if score >= 3:
             display.blit(obstacle1, (x2, y2))
-            obstacle1Col = pygame.Rect(x2, y2, obstacleSize1, obstacleSize2)
-            if playerCollision.colliderect(obstacle1Col):
-                print()
-                print("Game Over! You Died!")
-                print()
-                print("Score: " + str(score))
-                running = False
-                break
+            #obstacle1Col = pygame.Rect(x2, y2, obstacleSize1, obstacleSize2)
+            #if playerCollision.colliderect(obstacle1Col):
+                #print()
+                #print("Game Over! You Died!")
+                #print()
+                #print("Score: " + str(score))
+                #running = False
+                #break
             if score >= 5:
                 display.blit(obstacle2, (x3, y3))
-                obstacle2Col = pygame.Rect(x3, y3, obstacleSize1, obstacleSize2)
-                if playerCollision.colliderect(obstacle2Col):
-                    print()
-                    print("Game Over! You Died!")
-                    print()
-                    print("Score: " + str(score))
-                    running = False
-                    break
+                #obstacle2Col = pygame.Rect(x3, y3, obstacleSize1, obstacleSize2)
+                #if playerCollision.colliderect(obstacle2Col):
+                    #print()
+                    #print("Game Over! You Died!")
+                    #print()
+                    #print("Score: " + str(score))
+                    #running = False
+                    #break
                 if score >= 6:
                     display.blit(obstacle3, (x4,y4))
-                    obstacle3Col = pygame.Rect(x4, y4, obstacleSize1, obstacleSize2)
-                    if playerCollision.colliderect(obstacle3Col):
-                        print()
-                        print("Game Over! You Died!")
-                        print()
-                        print("Score: " + str(score))
-                        running = False
-                        break
+                    #obstacle3Col = pygame.Rect(x4, y4, obstacleSize1, obstacleSize2)
+                    #if playerCollision.colliderect(obstacle3Col):
+                        #print()
+                        #print("Game Over! You Died!")
+                        #print()
+                        #print("Score: " + str(score))
+                        #running = False
+                        #break
                     if score >= 7:
                         display.blit(obstacle4, (x5, y5))
-                        obstacle4Col = pygame.Rect(x5, y5,obstacleSize1,obstacleSize2)
-                        if playerCollision.colliderect(obstacle4Col):
-                            print()
-                            print("Game Over! You Died!")
-                            print()
-                            print("Score: " + str(score))
-                            running = False
-                            break
+                        #obstacle4Col = pygame.Rect(x5, y5,obstacleSize1,obstacleSize2)
+                        #if playerCollision.colliderect(obstacle4Col):
+                            #print()
+                            #print("Game Over! You Died!")
+                            #print()
+                            #print("Score: " + str(score))
+                            #running = False
+                            #break
                         if score == 8:
                             playMusic("epic.mp3")
                         if score >= 8:
