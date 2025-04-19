@@ -44,7 +44,6 @@ def lvl1():
         obstacle3 = pygame.transform.scale(obstacle3, (obstacleSize1, obstacleSize1))
         obstacle4 = pygame.image.load("augh3.png")
         obstacle4 = pygame.transform.scale(obstacle4, (obstacleSize1, obstacleSize1))
-        # DEFINE OBSTACLE IMAGES HERE
     except pygame.error as e:
         print(f"Error loading images: {e}")
         pygame.quit()
@@ -52,7 +51,7 @@ def lvl1():
     # Initialize positions
     #placeholder
     x1, y1 = 200, 200
-    x2, y2 = 105,385 # left down
+    x2, y2 = 70,290 # left down
     x3, y3 = 70,55 # left up
     x4,y4 = 325,335 # right down
     x5,y5 = 325,50 # right up
