@@ -3,6 +3,7 @@ from time import sleep
 import pygame
 from pygame import K_SPACE
 import keyboard
+import math
 
 pygame.init()
 
@@ -34,7 +35,6 @@ except pygame.error as e:
     exit()
 
 
-# 🔊 Music functions
 def playMusic(track):
     pygame.mixer.init()
     pygame.mixer.stop()
@@ -60,9 +60,9 @@ jump_strength = -17
 on_ground = True
 spikex = 900
 spikey = 310
-spike2x = 940
+spike2x = spikex + 40
 spike2y = 310
-spike3x = 980
+spike3x = spike2x + 40
 spike3y = 310
 global spikeDrawn
 spikeDrawn = False
@@ -78,8 +78,6 @@ global increment
 increment = 8
 global timesjumped
 timesjumped = 0
-# Function to draw and move the spike
-
 def drawSpikes():
     global spikex, spike2x, movespikeamt #draw and move first spike
     global spikesDrawn
@@ -98,28 +96,24 @@ def drawSpikes():
     display.blit(spike, (spikex, spikey))
 def drawSpikes2():
     global spike2x# Draw and move second spike
-    global movespikeamt
     global spikesDrawn
     global score
-    global spikecol2x
-    spikecol2X = spike2x + increment
     spike2x = spikex + 40
-    spike2col = pygame.Rect(spikecol2X, spike2y + 20, 20, 30)
+    spike2col = pygame.Rect(spike2x + 9, spike2y + 20, 20, 30)
     pygame.draw.rect(display, (255, 255, 255), spike2col)
     if spike2col.colliderect(playerCol):
         global running
         running = False
         print("Score: " + str(score))
     display.blit(spike2, (spike2x, spike2y))
-    pygame.display.update()
 global spikesdrawn
 def drawSpikes3():
-    global spikex, spike2x, spike3x, movespikeamt  # draw and move first spike
+    global spikex, spike2x, spike3x  # draw and move third spike
     global spikesDrawn
     global score
-    spike3col = pygame.Rect(spike3x + increment, spike3y + 20, 20, 30)
+    spike3x = spike2x + 40
+    spike3col = pygame.Rect(spike3x + 10, spike3y + 20, 20, 30)
     pygame.draw.rect(display, (255, 255, 255), spike3col)
-    spike3x -= movespikeamt
     if spike3col.colliderect(playerCol):
         global running
         running = False
