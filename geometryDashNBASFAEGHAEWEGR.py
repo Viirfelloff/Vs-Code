@@ -166,6 +166,6 @@ while running:
     display.blit(player, (playerx, playery))
     playerCol = pygame.Rect(playerx, playery, 75,75)
     moveSpike()
-    jump_strength += 0.002
-    movespikeamt += 0.002
+    jump_strength += 0.001
+    movespikeamt += 0.007
     pygame.display.update()
