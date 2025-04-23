@@ -5,13 +5,11 @@ public class AndrewIsGay {
         System.out.println("Who would u like to describe?");
         String person = scanner.nextLine();
         scanner.close();
-        if (person == "Andrew") {
-            describeAndrew(1);
-        }
+        describeAndrew(1);
     }
     public static void describeAndrew(int times) {
         for (int i = 0; i < times; i++) {
-            System.out.println("Im gay");
+            System.out.println("Im so majestic");
         }
     }
 }
