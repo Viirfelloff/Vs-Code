@@ -25,6 +25,6 @@ public class USACOPrc {
     }
 
     public static void main(String[] args) {
-        solution(8, 9, 10, 0, 0, 10);
+        solution(5,7,10,5,0,7);
     }
 }
