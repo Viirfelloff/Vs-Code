@@ -1,7 +1,7 @@
 from qiskit import QuantumCircuit
 import QuantumShortcuts
 
-qc = QuantumCircuit(4, 4)
+qc = QuantumShortcuts.create(4,4)
 qc.h(0)
 qc.h(2)
 qc.cx(0, 1)

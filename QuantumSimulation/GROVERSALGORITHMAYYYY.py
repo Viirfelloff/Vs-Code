@@ -2,7 +2,7 @@ from qiskit import QuantumCircuit
 import QuantumShortcuts
 
 #Step 0: Initialize
-qc = QuantumCircuit(2,2)
+qc = QuantumShortcuts.create(2,2)
 
 #Step 1: Apply Hadamard Gate to all Qubits
 qc.h([0,1])

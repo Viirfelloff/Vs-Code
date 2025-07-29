@@ -13,3 +13,5 @@ def displayInfo(qc : QuantumCircuit):
 
     plot_histogram(counts)
     plt.show()
+def create(qubits,cbits):
+    return QuantumCircuit(qubits, cbits)
