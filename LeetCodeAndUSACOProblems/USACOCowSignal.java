@@ -2,7 +2,7 @@ package LeetCodeAndUSACOProblems;
 
 import java.util.*;
 
-public class USACOIQuitBruh {
+public class USACOCowSignal {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int m = sc.nextInt();

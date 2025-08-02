@@ -1,9 +1,6 @@
 package LeetCodeAndUSACOProblems;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
-public class USACOWashedAUGH {
+public class USACOSpeedingTicket {
     public static int solution(int m, int n, int[] aclengths, int[] acspeeds, int[] besspeeds, int[] beslengths) {
         int counter = 0;
         int counter2 = 0;

@@ -1,6 +1,6 @@
 package LeetCodeAndUSACOProblems;
 
-public class USACOTooEasy {
+public class USACOBucketList {
     public static int[] solution (int n, int x, int[] values) {
         int inc1 = 0;
         for (int k : values) {

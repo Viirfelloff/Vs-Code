@@ -1,9 +1,8 @@
 package LeetCodeAndUSACOProblems;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
-public class USACOAreWeCooking {
+public class USACOMowingTheField {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();

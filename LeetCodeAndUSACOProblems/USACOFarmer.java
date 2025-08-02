@@ -1,9 +1,6 @@
 package LeetCodeAndUSACOProblems;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Farmer {
+public class USACOFarmer {
     public static void main(String[] args) {
         System.out.println(solution(7, "ABCDABC"));
     }

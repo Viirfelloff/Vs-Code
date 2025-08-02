@@ -1,6 +1,6 @@
 package LeetCodeAndUSACOProblems;
 //big brain activities
-public class USACO {
+public class USACOTheLostCow {
     //x is loop. 2^x is the amount moved. if x % 2 = 0, add. if not, subtract.
     public static int solution(int johnpos, int cowpos) {
         int loop = 0;

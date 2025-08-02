@@ -1,5 +1,5 @@
 package LeetCodeAndUSACOProblems;
-public class USACOPrc {
+public class USACOMixingMilk {
     public static void solution(int cap1, int cap2, int cap3, int amt1, int amt2, int amt3) {
         for (int i = 0; i < 100; i++) {
             int pour = 0;

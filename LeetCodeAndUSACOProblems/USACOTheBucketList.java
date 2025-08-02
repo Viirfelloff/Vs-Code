@@ -3,7 +3,7 @@ package LeetCodeAndUSACOProblems;
 import java.io.IOException;
 import java.util.*;
 
-public class USACOO {
+public class USACOTheBucketList {
     public static void main(String[] args) throws IOException {
         Kattio io = new Kattio("cowsignal");
         int n = io.nextInt();

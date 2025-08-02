@@ -1,10 +1,9 @@
 package LeetCodeAndUSACOProblems;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 //yo soy el
-public class USACOMore {
+public class USACOBovineShuffle {
     public static int[] solution (int cows, int[] order, int[] mixed) {
         int[] ordered = new int[cows];
         Map<Integer, Integer> non = new HashMap<>();
