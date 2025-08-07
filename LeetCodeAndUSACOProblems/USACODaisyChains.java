@@ -1,44 +1,39 @@
 package LeetCodeAndUSACOProblems;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-
+//yay!
 public class USACODaisyChains {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int[] petals = new int[n];
+        int count = n;
+        ArrayList<Integer> petals = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            petals[i] = sc.nextInt();
+            petals.add(sc.nextInt());
         }
-
-        // prefix sums: prefix[i] = sum of petals[0..i-1]
-        int[] prefix = new int[n + 1];
-        for (int i = 1; i <= n; i++) {
-            prefix[i] = prefix[i - 1] + petals[i - 1];
-        }
-
-        int count = 0;
-
-        // Loop through all subarrays [i, j]
-        for (int i = 0; i < n; i++) {
-            for (int j = i; j < n; j++) {
-                int length = j - i + 1;
-                int sum = prefix[j + 1] - prefix[i];
-
-                if (sum % length != 0) continue;  // skip if avg not integer
-
-                int avg = sum / length;
-
-                // check if any flower in [i..j] has exactly avg petals
-                for (int k = i; k <= j; k++) {
-                    if (petals[k] == avg) {
-                        count++;
-                        break;  // only count once per segment
+        for (int j = 0; j < petals.size(); j++) {
+            List<Integer> subarray = new ArrayList<>();
+            subarray.add(petals.get(j));
+            int sum = petals.get(j);
+            for (int k = j + 1; k < petals.size(); k++) {
+                sum += petals.get(k);
+                subarray.add(petals.get(k));
+                int length = subarray.size();
+                if (sum % length != 0) continue;
+                int target = sum / length;
+                boolean valid = false;
+                for (int x : subarray) {
+                    if (x == target) {
+                        valid = true;
+                        break;
                     }
                 }
+                if (valid) count++;
             }
         }
-
         System.out.println(count);
     }
 }
