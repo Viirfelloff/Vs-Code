@@ -1,27 +1,24 @@
 package LeetCodeAndUSACOProblems;
 import java.util.*;
-//we failed yet again
+//failed yet agian. youre never passing bronze at this pace.
 public class USACOCitiesStates {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        Map<String, Integer> map = new HashMap<>();
         int count = 0;
-
+        Map<String, String> citystate = new LinkedHashMap<>();
         for (int i = 0; i < n; i++) {
-            String city = sc.next();
+            String s = sc.next();
             String state = sc.next();
-            String prefix = city.substring(0, 2);
-
-            if (prefix.equals(state)) continue;
-
-            String code = prefix + state;
-            String reverse = state + prefix;
-
-            count += map.getOrDefault(reverse, 0);
-            map.put(code, map.getOrDefault(code, 0) + 1);
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < 2; j++) {
+                sb.append(s.charAt(j));
+            }
+            if (citystate.containsKey(state) && citystate.get(state).contentEquals(sb)) {
+                count++;
+            }
+            citystate.put(sb.toString(), state);
         }
-
         System.out.println(count);
     }
 }
