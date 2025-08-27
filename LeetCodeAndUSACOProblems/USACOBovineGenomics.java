@@ -18,12 +18,8 @@ public class USACOBovineGenomics {
                 plains.add(sc.next().toCharArray());
             }
         }
-        List<Integer> positions = new ArrayList<>();
-        for (int k = 1; k <= m; k++) {
-            positions.add(k);
-        }
         int tuples = 0;
-        for (int j = 0; j < positions.size(); j++) {
+        for (int j = 0; j < m; j++) {
             for (int v = j + 1; v < m; v++) {
                 for (int e = v + 1; e < m; e++) {
                     HashSet<List<Character>> spottuples = new LinkedHashSet<>();
