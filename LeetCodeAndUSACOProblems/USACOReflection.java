@@ -20,7 +20,6 @@ public class USACOReflection {
             int y = sc.nextInt();
             updates.add(Arrays.asList(x,y));
         }
-
         for (int k = 0; k < updates.size(); k++) {
             int r = updates.get(k).get(0);
             int c = updates.get(k).get(1);
