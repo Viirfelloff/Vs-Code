@@ -1,7 +1,7 @@
 package LeetCodeAndUSACOProblems.ContestProblems;
 import java.io.*;
 import java.util.*;
-
+//literally solved bro wtf after the contest liek lokc in u could ahve gotten more rating
 public class CodeForcesDiv4Round1050D {
     public static void main(String[] args) {
         MyScanner sc = new MyScanner();
