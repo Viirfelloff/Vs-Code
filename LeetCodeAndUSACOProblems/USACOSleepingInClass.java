@@ -1,73 +1,67 @@
-
 import java.io.*;
 import java.util.*;
 
-public class USACOSleepingInClass { // replace with actual problem name
+public class USACOSleepingInClass {
     static FastScanner in;
     static PrintWriter out;
 
     public static void main(String[] args) throws IOException {
-        in = new FastScanner(); // read from stdin
-        out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out))); // write to stdout
-        int t = in.nextInt();
-        for (int i = 0; i < t; i++) {
-            int n = in.nextInt();
+        in = new FastScanner();
+        out = new PrintWriter(System.out);
+
+        int T = in.nextInt();
+        while (T-- > 0) {
+            int N = in.nextInt();
+            int[] a = new int[N];
             long sum = 0;
-            Set<Integer> availible = new HashSet<>();
-            List<Integer> times = new ArrayList<>();
-            for (int k = 0; k < n; k++) {
-                int x = in.nextInt();
-                times.add(x);
-                availible.add(x);
-                sum += x;
+            for (int i = 0; i < N; i++) {
+                a[i] = in.nextInt();
+                sum += a[i];
             }
-            if (availible.size() == 1) {
+
+            // special case: all zeros
+            if (sum == 0) {
                 out.println(0);
-            } else {
-                Set<Long> divisors = new HashSet<>();
-                for (int j = 1; (long) j * j <= sum; j++) {
-                    if (sum % j == 0) {
-                        divisors.add((long) j);
-                        divisors.add(sum / j);
-                    }
-                }
-                int minMoves = n; // initialize to worst case
-                for (long xx : divisors) {
-                    // treat xx as combining value
-                    int combines = 0;
-                    long currentSum = 0;
-                    boolean valid = true;
-                    for (int y : times) {
-                        if (currentSum == 0) {
-                            currentSum += y;
-                        } else {
-                            currentSum += y;
-                            combines++;
-                        }
-                        if (currentSum == xx) {
-                            currentSum = 0;
-                        } else if (currentSum > xx) {
-                            valid = false;
-                            break;
-                        }
-                    }
-                    if (valid) {
-                        minMoves = Math.min(minMoves, combines);
-                    }
-                }
-                out.println(minMoves);
+                continue;
             }
+
+            int ans = N - 1; // worst case: merge everything into one group
+            // iterate over divisors of sum
+            for (long d = 1; d * d <= sum; d++) {
+                if (sum % d == 0) {
+                    ans = Math.min(ans, check(a, (int) d, N));
+                    ans = Math.min(ans, check(a, (int) (sum / d), N));
+                }
+            }
+
+            out.println(ans);
         }
 
-        out.close(); // don't forget to close
+        out.flush();
     }
 
-    // --- FastScanner class for Scanner-like feel ---
+    // check if we can partition into groups of sum target
+    static int check(int[] a, int target, int N) {
+        int groups = 0;
+        int curr = 0;
+        for (int x : a) {
+            curr += x;
+            if (curr > target) return N - 1; // impossible, return large value
+            if (curr == target) {
+                groups++;
+                curr = 0;
+            }
+        }
+        if (curr != 0) return N - 1; // not perfectly partitioned
+        return N - groups;
+    }
+
+    // FastScanner for fast input
     static class FastScanner {
         BufferedReader br;
         StringTokenizer st;
 
-        public FastScanner() {
+        FastScanner() {
             br = new BufferedReader(new InputStreamReader(System.in));
         }
 
@@ -82,19 +76,6 @@ public class USACOSleepingInClass { // replace with actual problem name
 
         int nextInt() throws IOException {
             return Integer.parseInt(next());
-        }
-
-        long nextLong() throws IOException {
-            return Long.parseLong(next());
-        }
-
-        double nextDouble() throws IOException {
-            return Double.parseDouble(next());
-        }
-
-        String nextLine() throws IOException {
-            st = null; // reset tokenizer
-            return br.readLine();
         }
     }
 }

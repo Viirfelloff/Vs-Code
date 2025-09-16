@@ -1,12 +1,16 @@
 package LeetCodeAndUSACOProblems;
-
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class USACOHardLesGo {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String s = sc.next();
-        String m = sc.next();
+    public static void main(String[] args) throws IOException {
+        // File input
+        BufferedReader br = new BufferedReader(new FileReader("censor.in"));
+        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("censor.out")));
+
+        String s = br.readLine().trim();  // S
+        String m = br.readLine().trim();  // T
+
         StringBuilder sb = new StringBuilder();
         for (char c : s.toCharArray()) {
             sb.append(c);
@@ -23,6 +27,9 @@ public class USACOHardLesGo {
                 }
             }
         }
-        System.out.println(sb.toString());
+
+        out.println(sb.toString());
+        out.close();
+        br.close();
     }
 }
