@@ -1,9 +1,7 @@
-package LeetCodeAndUSACOProblems;
 
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
-//were literally him
-//get off me
 public class CodeForces2112A {
     public static String solution (int a, int x, int y) {
         int sols = 0;
@@ -32,6 +30,10 @@ public class CodeForces2112A {
         return "NO";
     }
     public static void main(String[] args) {
-        System.out.println(solution(3, 1, 5));
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for (int i = 0; i < t; i++) {
+            System.out.println(solution(sc.nextInt(), sc.nextInt(), sc.nextInt()));
+        }
     }
 }

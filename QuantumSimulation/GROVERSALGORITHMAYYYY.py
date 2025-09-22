@@ -11,9 +11,7 @@ qc = QuantumShortcuts.create(2,2)
 qc.h([0,1])
 
 #Step 2: Oracle Operator (Sign Change)
-qc.x(1)
 qc.cz(0,1)
-qc.x(1)
 #Step 3: Diffusion
 qc.h([0,1])
 qc.x([0,1])
