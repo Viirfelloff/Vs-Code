@@ -13,15 +13,19 @@ public class USACOMakingMexes {
         int n = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
         List<Integer> list = new ArrayList<>();
-        Set<Integer> nNumbers = new HashSet<>();
+        Set<Integer> nNumbers = new LinkedHashSet<>();
         int nSize = n + 1;
         int zerocount = 0;
+        List<Integer> actual = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             int tkn = Integer.parseInt(st.nextToken());
-            list.add(tkn);
+            list.add(i);
             nNumbers.add(tkn);
+            actual.add(tkn);
             if (tkn == 0) zerocount++;
         }
+        List<Integer> nNums = new ArrayList<>(nNumbers);
+        Collections.sort(nNums);
         Collections.sort(list);
         for (int x : list) {
             //mex = x
@@ -36,6 +40,8 @@ public class USACOMakingMexes {
                 if (nNumbers.size() == nSize) res.add(0);
                 else res.add(nSize - nNumbers.size());
             } else {
+                List<Integer> nm = new ArrayList<>(nNums.subList(0, x - 1));
+                
 
             }
         }
