@@ -1,4 +1,4 @@
-
+package LeetCodeAndUSACOProblems;
 
 import java.util.Scanner;
 
