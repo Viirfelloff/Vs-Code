@@ -4,34 +4,30 @@ public class CodeForces1722D {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
-
-        while (t-- > 0) {
+        for (int j = 0; j < t; j++) {
             int n = sc.nextInt();
             String s = sc.next();
-
             long count = 0;
-            long[] gains = new long[n];
+            List<Long> gain = new ArrayList<>();
 
-            // Step 1: compute initial line value and gain if flipped
             for (int i = 0; i < n; i++) {
                 if (s.charAt(i) == 'L') {
                     count += i;
-                    gains[i] = (n - 1 - i) - i;
+                    gain.add((long)(n - 1 - 2*i)); // gain if flipped
                 } else {
-                    count += (n - 1 - i);
-                    gains[i] = i - (n - 1 - i);
+                    count += n - 1 - i;
+                    gain.add((long)(2*i - (n - 1))); // gain if flipped
                 }
             }
 
-            // Step 2: sort gains descending
-            Arrays.sort(gains);
-            long sumGain = 0;
+            gain.sort((a,b) -> Long.compare(b,a));
 
-            // Step 3: print answers for k = 1..n
-            for (int k = 1; k <= n; k++) {
-                if (k <= n && gains[n - k] > 0) sumGain += gains[n - k];
-                System.out.print((count + sumGain) + (k == n ? "\n" : " "));
+            long current = count;
+            for (int m = 0; m < n; m++) {
+                if (gain.get(m) > 0) current += gain.get(m);
+                System.out.print(current + " ");
             }
+            System.out.println();
         }
     }
 }
