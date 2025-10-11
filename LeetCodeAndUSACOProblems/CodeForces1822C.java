@@ -2,7 +2,7 @@
 
 import java.util.Scanner;
 
-// ur fucking him, found the algorithm in seconds
+
 public class CodeForces1822C {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
