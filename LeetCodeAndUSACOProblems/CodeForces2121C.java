@@ -1,5 +1,5 @@
 import java.util.*;
-//TODO: IMPLEMENT 10/14
+//TODO: IMPLEMENT 10/19
 public class CodeForces2121C {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -20,7 +20,6 @@ public class CodeForces2121C {
             }
             Set<Integer> rowsMax = new HashSet<>();
             Set<Integer> colsMax = new HashSet<>();
-
         }
     }
 }
