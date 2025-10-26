@@ -5,63 +5,62 @@ public class USACOLeaders {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         String s = sc.next();
-        int[] e = new int[n + 1];
-        for (int i = 1; i <= n; i++) e[i] = sc.nextInt();
-
-        int totalG = 0, totalH = 0;
-        for (char c : s.toCharArray()) {
-            if (c == 'G') totalG++;
-            else totalH++;
+        List<Integer> lists = new ArrayList<>();
+        //firstleader
+        int firstHIdx = 0;
+        int firstGIdx = 0;
+        int lastHIdx = 0;
+        int lastGIdx = 0;
+        for (int i = 0; i < n; i++) {
+            lists.add(sc.nextInt());
         }
-
-        int[] prefixG = new int[n + 1];
-        int[] prefixH = new int[n + 1];
-        for (int i = 1; i <= n; i++) {
-            prefixG[i] = prefixG[i - 1] + (s.charAt(i - 1) == 'G' ? 1 : 0);
-            prefixH[i] = prefixH[i - 1] + (s.charAt(i - 1) == 'H' ? 1 : 0);
+        int idx = 0;
+        for (char c: s.toCharArray()) {
+            if (c == 'H') {
+                firstHIdx = idx;
+                break;
+            }
+            idx++;
         }
-
+        int idx2 = 0;
+        for (char c: s.toCharArray()) {
+            if (c == 'G') {
+                firstGIdx = idx;
+                break;
+            }
+            idx2++;
+        }
+        int idx3 = s.length() - 1;
+        for (int k = idx3; k >= 0; k--) {
+            if (s.charAt(k) == 'G') {
+                idx3 = k;
+                break;
+            }
+        }
+        int idx4 = s.length() - 1;
+        for (int kk = idx3; kk >= 0; kk--) {
+            if (s.charAt(kk) == 'H') {
+                idx4 = kk;
+                break;
+            }
+        }
+        lastGIdx = idx3;
+        lastHIdx = idx4;
         Set<Integer> firstLeaders = new HashSet<>();
-        for (int i = 1; i <= n; i++) {
-            if (s.charAt(i - 1) == 'G') {
-                int gInRange = prefixG[e[i]] - prefixG[i - 1];
-                if (gInRange == totalG) firstLeaders.add(i);
-            } else {
-                int hInRange = prefixH[e[i]] - prefixH[i - 1];
-                if (hInRange == totalH) firstLeaders.add(i);
-            }
+        if ((lists.get(firstHIdx) - 1) >= lastHIdx) {
+            firstLeaders.add(firstHIdx);
         }
-
-        int minG = Integer.MAX_VALUE, maxG = -1;
-        int minH = Integer.MAX_VALUE, maxH = -1;
-        for (int idx : firstLeaders) {
-            if (s.charAt(idx - 1) == 'G') {
-                minG = Math.min(minG, idx);
-                maxG = Math.max(maxG, idx);
-            } else {
-                minH = Math.min(minH, idx);
-                maxH = Math.max(maxH, idx);
-            }
+        if ((lists.get(firstGIdx) - 1) >= lastGIdx) {
+            firstLeaders.add(firstGIdx);
         }
-
-        Set<Integer> gLeaders = new HashSet<>();
-        Set<Integer> hLeaders = new HashSet<>();
-
-        // second condition
-        for (int i = 1; i <= n; i++) {
-            int right = e[i];
-            char breed = s.charAt(i - 1);
-            if (breed == 'G') {
-                if ((right >= minH && i <= maxH) || firstLeaders.contains(i)) {
-                    gLeaders.add(i);
-                }
-            } else {
-                if ((right >= minG && i <= maxG) || firstLeaders.contains(i)) {
-                    hLeaders.add(i);
-                }
-            }
+        //secondleaders
+        Set<Integer> secondLeaders = new HashSet<>();
+        int inc = 0;
+        for (int x : lists) {
+            int lower = inc;
+            int upper = x - 1;
+            if (!firstLeaders.contains(x) && ())
+            inc++;
         }
-
-        System.out.println(gLeaders.size() * hLeaders.size());
     }
 }
