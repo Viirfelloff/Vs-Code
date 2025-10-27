@@ -59,7 +59,6 @@ public class USACOLeaders {
         for (int x : lists) {
             int lower = inc;
             int upper = x - 1;
-            if (!firstLeaders.contains(x) && ())
             inc++;
         }
     }
