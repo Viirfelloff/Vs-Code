@@ -1,8 +1,4 @@
-package LeetCodeAndUSACOProblems;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class CodeForces1857C {
     public static void main(String[] args) {
@@ -11,11 +7,21 @@ public class CodeForces1857C {
         for (int i = 0; i < t; i++) {
             int n = sc.nextInt();
             List<Long> list = new ArrayList<>();
-            for (int k = 0; k < n; k++) list.add(sc.nextLong());
-            int pairs = (n*(n-1)) / 2;
-            for (int j = 0; j < pairs; j++) {
-
+            Map<Long, Integer> map = new HashMap<>();
+            for (int k = 0; k < (n*(n-1)) / 2; k++) {
+                long next = sc.nextLong();
+                map.put(next, map.getOrDefault(next, 0) + 1);
+                list.add(next);
             }
+            Collections.sort(list);
+            List<Long> res = new ArrayList<>();
+            int curIndex = 0;
+            for (int j = n - 1; j >= 1; j--) {
+                res.add(list.get(curIndex));
+                curIndex += j;
+            }
+            res.add(1000000000L);
+            for (long x: res) System.out.println(x);
         }
     }
 }
