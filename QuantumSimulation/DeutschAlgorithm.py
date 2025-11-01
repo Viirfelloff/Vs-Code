@@ -33,7 +33,7 @@ QuantumShortcuts.displayInfo(qc)
 # Recall we flip the first qubit back after this.
 # States after second Pauli-X ==> 01-00+10-11. Rearranged ==> -00+01+10-11.
 # When we apply hadamard on the first qubit only, we are left with: -10+11.
-# Because the first qubit is alway 1, we conclude that the f(x) is indeed balanced.
+# Because the first qubit is always 1, we conclude that the f(x) is indeed balanced.
 # Why does this work? If f(1) = 0, f(0) = 0, we apply no flips. Thus, we return only 01 and 00
 # for a second hadamard on the first qubit. (+ kets return to 0).
 # The same principle applies for f(0) = 1 and f(1) = 1. we flip twice and avoid matrix interference.

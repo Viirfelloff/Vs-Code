@@ -9,5 +9,6 @@ public class USACOCowCheckups {
         //for every l,r, count matches and put it into an array.
         //for each int c in the range 0...N, take arr[c]
         //to count matches, only change what is reversed inside.
+
     }
 }
