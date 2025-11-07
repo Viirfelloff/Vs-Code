@@ -6,29 +6,34 @@ public class CodeForces2047B {
         for (int i = 0; i < t; i++) {
             int n = sc.nextInt();
             String s = sc.next();
+
+            // Count frequencies
             Map<Character, Integer> freq = new HashMap<>();
             for (char c : s.toCharArray()) freq.put(c, freq.getOrDefault(c, 0) + 1);
 
-// 2. Find character with max frequency
-            char c_max = s.charAt(0);
-            int maxFreq = 0;
-            for (Map.Entry<Character, Integer> e : freq.entrySet()) {
-                if (e.getValue() > maxFreq) {
-                    maxFreq = e.getValue();
-                    c_max = e.getKey();
-                }
-            }
+            // Find most and least frequent characters
+            List<Character> chars = new ArrayList<>(freq.keySet());
+            List<Integer> freqs = new ArrayList<>(freq.values());
 
-// 3. Replace first char not equal to c_max
-            char[] arr = s.toCharArray();
-            for (int ii = 0; ii < arr.length; ii++) {
-                if (arr[ii] != c_max) {
-                    arr[ii] = c_max;
+            char mostFreqChar = chars.get(freqs.indexOf(Collections.max(freqs)));
+            char leastFreqChar = chars.get(freqs.indexOf(Collections.min(freqs)));
+
+            // Convert string to list of characters
+            List<Character> list = new ArrayList<>();
+            for (char c : s.toCharArray()) list.add(c);
+
+            // Replace first occurrence of the **least frequent** char with the most frequent char
+            for (int j = 0; j < list.size(); j++) {
+                if (list.get(j) == leastFreqChar) {
+                    list.set(j, mostFreqChar);
                     break;
                 }
             }
 
-            System.out.println(new String(arr));
+            // Build and print new string
+            StringBuilder sb = new StringBuilder();
+            for (char c : list) sb.append(c);
+            System.out.println(sb.toString());
         }
     }
 }
