@@ -41,7 +41,6 @@ public class CodeForces2172E {
             int number = sc.nextInt();
             int j = sc.nextInt();
             int k = sc.nextInt();
-            List<String> = permute(Integer.toString(number));
         }
     }
 }
