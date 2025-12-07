@@ -9,8 +9,12 @@ public class USACOSocialDistancingI {
         PrintWriter pr = new PrintWriter(new FileWriter("socdist1.out"));
         int N = Integer.parseInt(br.readLine());
         String s = String.valueOf(br.readLine());
-        //we have 2 options here. 1. put both in the same stretch of zeroes. 2. put them in the middle of the 2 longest stretches.
-        //test both, and see the maximum distance between both.
-
+        //essentially, maximize D.
+        //to do this, take the current D. D * 2 + 1 is the minimum length of 0 block for preserving D.
+        //if none exist, decrease D and repeat.
+        //after, its the second cow. repeat the same process.
+        br.close();
+        pr.flush();
+        pr.close();
     }
 }
