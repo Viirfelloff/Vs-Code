@@ -31,7 +31,7 @@ public class CodeForces2112B {
                         if (k == 0) {
                             //right by 2
                             int element = nums.get(k + 2);
-                            int upperRange = Math.max(nums.get(k), nums.get(k + 1);
+                            int upperRange = Math.max(nums.get(k), nums.get(k + 1));
                             int lowerRange = Math.min(nums.get(k), nums.get(k + 1));
                             int pos1 = element - 1;
                             int pos2 = element + 1;
