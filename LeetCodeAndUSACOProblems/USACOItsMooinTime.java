@@ -8,6 +8,5 @@ public class USACOItsMooinTime {
         int n = sc.nextInt();
         int f = sc.nextInt();
         String s = sc.next();
-
     }
 }
