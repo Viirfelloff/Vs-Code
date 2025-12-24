@@ -1,5 +1,3 @@
-package LeetCodeAndUSACOProblems;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +95,7 @@ public class CodeForces1375B {
         //if both do not work, transition to cells not checked yet. future iterations will fix them.
         boolean topPossible = true;
         boolean bottomPossible = true;
-
+        return grid;
     }
     public static boolean inBounds(List<List<Long>> grid, int i, int j) {
         int lower = 0;

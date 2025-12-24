@@ -31,7 +31,7 @@ public class CodeForces1819A {
             boolean valid = true;
             for (long x : map.keySet()) {
                 if (map2.containsKey(x)) {
-                    if (map2.get(x) == map.get(x)) {
+                    if (Objects.equals(map2.get(x), map.get(x))) {
                         valid = false;
                         break;
                     }
