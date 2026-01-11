@@ -7,41 +7,33 @@ public class USACOContest1BronzeP3 {
         int k = sc.nextInt();
         int q = sc.nextInt();
         long[][] grid = new long[n][n];
-        long[][] pref = new long[n][n];
-        long max = 0;
+        long[][] squareSums = new long[n][n];
         for (int i = 0; i < q; i++) {
             //the idea here is for every query brute force the positon of the camera
             int r = sc.nextInt() - 1;
             int c = sc.nextInt() - 1;
             long v = sc.nextLong();
+            long cc = v - grid[r][c];
             grid[r][c] = v;
-            for (int j = 0; j < n; j++) {
-                for (int kk = 0; kk < n; kk++) {
-                    long up = kk > 0 ? pref[kk - 1][j] : 0;
-                    long left = j > 0 ? pref[kk][j - 1] : 0;
-                    long diag = (kk > 0 && j > 0) ? pref[kk - 1][j - 1] : 0;
-                    pref[kk][j] = grid[kk][j] + up + left - diag;
-                }
-            }
-            int r1 = Math.max(0, r - k + 1);
-            int c1 = Math.max(0,c - k + 1);
-
-            for (int b = r1; b <= Math.min(r, n - k); b++) {
-                for (int j = c1; j <= Math.min(c, n - k); j++) {
-                    int r2 = b + k - 1;
-                    int c2 = j + k - 1;
-
-                    long sum = pref[r2][c2];
-                    if (b > 0) sum -= pref[b - 1][c2];
-                    if (j > 0) sum -= pref[r2][j - 1];
-                    if (b > 0 && j > 0) sum += pref[b - 1][j - 1];
-
-                    if (sum > max) {
-                        max = sum;
+            if (cc != 0) {
+                //update sum arr
+                int startY = Math.max(r - k + 1, 0);
+                int endY = Math.min(r, n - k);
+                int startX = Math.max(c - k + 1, 0);
+                int endX = Math.min(c, n - k);
+                for (int j = startY; j <= endY; j++) {
+                    for (int s = startX; s <= endX; s++) {
+                        squareSums[j][s] += v;
                     }
                 }
             }
-            System.out.println(max);
+            long curMax = 0;
+            for (long[] longs : squareSums) {
+                for (long l : longs) {
+                    if (l > curMax) curMax = l;
+                }
+            }
+            System.out.println(curMax);
         }
     }
 }
