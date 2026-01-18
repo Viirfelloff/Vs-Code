@@ -5,7 +5,11 @@ public class USACOWalkingOnAFence {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int p = sc.nextInt();
-        Map<Integer, Integer> lines = new LinkedHashMap<>();
+        //key = the constant, int[0] = start, int[1] = end
+        Map<Integer, int[]> lineXClock = new LinkedHashMap<>();
+        Map<Integer, int[]> lineYClock = new LinkedHashMap<>();
+        Map<Integer, int[]> lineXAT = new LinkedHashMap<>();
+        Map<Integer, int[]> lineYAT = new LinkedHashMap<>();
         List<int[]> pos = new ArrayList<>();
         for (int i = 0; i < p; i++) {
             int x = sc.nextInt();
@@ -35,6 +39,11 @@ public class USACOWalkingOnAFence {
             int yOffset = Math.abs(curCoord[1] - coord2[1]);
             curSum1 += xOffset + yOffset;
             pfSclock.add(curSum1);
+            if (xOffset == 0) {
+                lineXClock.put(curCoord[0], new int[]{coord2[1], curCoord[1]});
+            } else {
+                lineYClock.put(curCoord[1], new int[]{coord2[0], curCoord[0]});
+            }
         }
         int curSum2 = 0;
         pfSatClock.add(curSum2);
@@ -50,6 +59,17 @@ public class USACOWalkingOnAFence {
             int yOffset = Math.abs(curCoord[1] - coord2[1]);
             curSum2 += xOffset + yOffset;
             pfSatClock.add(curSum2);
+            if (xOffset == 0) {
+                lineXAT.put(curCoord[0], new int[]{coord2[1], curCoord[1]});
+            } else {
+                lineYAT.put(curCoord[1], new int[]{coord2[0], curCoord[0]});
+            }
+        }
+        //use this for check and formulate strategy for adding + subtracting offsets.
+        for (int j = 0; j < n; j++) {
+            int[] st = new int[]{stendpos.get(j)[0], stendpos.get(j)[1]};
+            int[] end = new int[]{stendpos.get(j)[2], stendpos.get(j)[3]};
+
         }
     }
 }
