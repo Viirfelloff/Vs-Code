@@ -1,7 +1,7 @@
-from qiskit import QuantumCircuit
+import qiskit
 import QuantumShortcuts
 
-qc = QuantumCircuit(2, 2)
+qc = qiskit.QuantumCircuit(2, 2)
 
 # Step 1: Set |y⟩ = |1⟩
 qc.x(1)
