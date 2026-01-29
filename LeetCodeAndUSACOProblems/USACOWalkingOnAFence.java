@@ -5,7 +5,8 @@ public class USACOWalkingOnAFence {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int p = sc.nextInt();
-        //key = the constant, int[0] = start, int[1] = end
+        //key = the constant, int[0] = start, int[1] = end, int[2] = number of the start post (index)
+        //end post = index + 1. if it equals p, the index is really zero.
         Map<Integer, int[]> lineXClock = new LinkedHashMap<>();
         Map<Integer, int[]> lineYClock = new LinkedHashMap<>();
         Map<Integer, int[]> lineXAT = new LinkedHashMap<>();
@@ -20,9 +21,6 @@ public class USACOWalkingOnAFence {
         for (int i = 0; i < n; i++) stendpos.add(new int[]{sc.nextInt(),sc.nextInt(),sc.nextInt(),sc.nextInt()});
         List<Integer> pfSclock = new ArrayList<>();
         List<Integer> pfSatClock = new ArrayList<>();
-        //each of the above arrayLists for each post labeled i returns the sum of traversing between posts. [0] = x sum, [1] = y sums
-        //one traverses clockwise, one traverses anticlockwise.
-        //build prefix sums
         int curSum1 = 0;
         pfSclock.add(curSum1);
         for (int i = 1; i <= p; i++) {
@@ -40,9 +38,9 @@ public class USACOWalkingOnAFence {
             curSum1 += xOffset + yOffset;
             pfSclock.add(curSum1);
             if (xOffset == 0) {
-                lineXClock.put(curCoord[0], new int[]{coord2[1], curCoord[1]});
+                lineXClock.put(curCoord[0], new int[]{coord2[1], curCoord[1], i - 1});
             } else {
-                lineYClock.put(curCoord[1], new int[]{coord2[0], curCoord[0]});
+                lineYClock.put(curCoord[1], new int[]{coord2[0], curCoord[0], i - 1});
             }
         }
         int curSum2 = 0;
@@ -65,11 +63,21 @@ public class USACOWalkingOnAFence {
                 lineYAT.put(curCoord[1], new int[]{coord2[0], curCoord[0]});
             }
         }
-        //use this for check and formulate strategy for adding + subtracting offsets.
+        switchAndDelete(pfSclock);
+        switchAndDelete(pfSatClock);
         for (int j = 0; j < n; j++) {
             int[] st = new int[]{stendpos.get(j)[0], stendpos.get(j)[1]};
             int[] end = new int[]{stendpos.get(j)[2], stendpos.get(j)[3]};
+            int clockDistance = 0;
+            int antiClockDistance = 0;
 
         }
+    }
+    public static void switchAndDelete(List<Integer> list) {
+        //switch last and first
+        int temp = list.get(list.size() - 1);
+        list.set(list.size() - 1, list.get(0));
+        list.set(0, temp);
+        list.remove(list.size() - 1);
     }
 }
