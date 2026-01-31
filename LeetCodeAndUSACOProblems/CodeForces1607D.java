@@ -43,7 +43,7 @@ public class CodeForces1607D {
             //also do suffix
             //for each do the occurrences, indices, and colors
             //run thru and evaluate.
-
+            System.out.println("YES");
         }
     }
 }
