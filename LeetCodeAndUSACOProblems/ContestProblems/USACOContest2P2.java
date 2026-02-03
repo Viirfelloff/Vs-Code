@@ -17,9 +17,6 @@ public class USACOContest2P2 {
         }
 
         int size = occ.size();
-        long[] mmask = new long[size];
-        long[] omask = new long[size];
-
         int[] xarr = new int[size];
         int[] yarr = new int[size];
         int[] zarr = new int[size];
@@ -27,21 +24,29 @@ public class USACOContest2P2 {
         int p = 0;
         for (String key : occ.keySet()) {
             String[] parts = key.split(",");
-            int x = Integer.parseInt(parts[0]);
-            int y = Integer.parseInt(parts[1]);
-            int z = Integer.parseInt(parts[2]);
-            mmask[p] = 1L << x;
-            omask[p] = (1L << y) | (1L << z);
+            xarr[p] = Integer.parseInt(parts[0]);
+            yarr[p] = Integer.parseInt(parts[1]);
+            zarr[p] = Integer.parseInt(parts[2]);
             counts[p] = occ.get(key);
             p++;
         }
         int maxScore = -1;
         int ways = 0;
-        int limit = 1 << n;
+        double limit = Math.pow(2,n);
         for (int i = 0; i < limit; i++) {
+            String board = Integer.toBinaryString(i);
+            StringBuilder zeroes = new StringBuilder();
+            zeroes.append(board);
+            int diff = n - board.length();
+            zeroes.append("0".repeat(Math.max(0, diff)));
+            board = zeroes.toString();
             int curscore = 0;
             for (int j = 0; j < size; j++) {
-                if ((i & mmask[j]) == 0 && (i & omask[j]) == omask[j]) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(board.charAt(xarr[j]));
+                sb.append(board.charAt(yarr[j]));
+                sb.append(board.charAt(zarr[j]));
+                if (sb.toString().equals("MOO")) {
                     curscore += counts[j];
                 }
             }
