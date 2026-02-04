@@ -9,14 +9,12 @@ public class USACOContest1BronzeP3 {
         long[][] grid = new long[n][n];
         long[][] squareSums = new long[n][n];
         for (int i = 0; i < q; i++) {
-            //the idea here is for every query brute force the positon of the camera
             int r = sc.nextInt() - 1;
             int c = sc.nextInt() - 1;
             long v = sc.nextLong();
             long cc = v - grid[r][c];
             grid[r][c] = v;
             if (cc != 0) {
-                //update sum arr
                 int startY = Math.max(r - k + 1, 0);
                 int endY = Math.min(r, n - k);
                 int startX = Math.max(c - k + 1, 0);
