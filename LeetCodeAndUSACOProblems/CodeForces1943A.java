@@ -1,11 +1,8 @@
 import java.util.*;
-//CHANGE IMPLEMENTAITON 2/5 TO INCLUDE THE REMOVING EARLIER VALUES BEFORE ALICE GETS TO THEM IDEA
-//THIS ALLOWS FOR AC, THIS IS INCOMPLETE APPROACH.
 public class CodeForces1943A {
+    //alice saves smallest such that occ = 1.
+    //then bob deletes the next one. this is the result.
     public static void main(String[] args) {
-        //IDEA FOR FULL SOLVE: so we want to remove a value before she gets to it.
-        //the idea here maybe then is to try to remove each before she can 'get' to it
-        //use this and the single removal idea, take the min.
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
         for (int i = 0; i < t; i++) {
@@ -18,28 +15,32 @@ public class CodeForces1943A {
                 map.put(x, map.getOrDefault(x,0) + 1);
             }
             int mex = getMex(list);
-            Set<Integer> imp = new HashSet<>();
+            Set<Integer> lessThanMEX = new HashSet<>();
             for (int x : list) {
-                if (x < mex) imp.add(x);
+                if (x < mex) lessThanMEX.add(x);
             }
-            List<Integer> impList = new ArrayList<>(imp);
-            Collections.sort(impList);
-            int ans = -1;
+            List<Integer> lessThanMEXList = new ArrayList<>(lessThanMEX);
+            Collections.sort(lessThanMEXList);
             if (mex == 0) System.out.println(0);
             else if (mex == 1) System.out.println(1);
             else {
-                boolean valid = true;
-                for (int j = 0; j < imp.size(); j++) {
-                    if (impList.get(j) != 0) {
-                        if (map.get(impList.get(j)) == 1) {
-                            ans = impList.get(j);
-                            valid = false;
+                int oneFreq = 0;
+                for (int x : lessThanMEXList) {
+                    if (map.get(x) == 1) oneFreq++;
+                }
+                if (oneFreq == 0 || oneFreq == 1) System.out.println(mex);
+                else {
+                    boolean first = false;
+                    int ans = -1;
+                    for (int x : lessThanMEXList) {
+                        if (map.get(x) == 1 && !first) first = true;
+                        else if (map.get(x) == 1 && first) {
+                            ans = x;
                             break;
                         }
                     }
+                    System.out.println(ans);
                 }
-                if (!valid) System.out.println(ans);
-                else System.out.println(mex);
             }
         }
     }
