@@ -85,7 +85,7 @@ public class CodeForces1868A {
             for (int j = 0; j < grid[0].length; j++) {
                 System.out.print(grid[i][j] + " ");
             }
-            System.out.println(); // new line after each row
+            System.out.println();
         }
     }
 }
