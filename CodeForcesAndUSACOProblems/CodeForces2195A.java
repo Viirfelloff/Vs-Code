@@ -11,7 +11,7 @@ public class CodeForces2195A {
             for (int j = 0; j < n; j++) {
                 set.add(sc.nextInt());
             }
-            if (set.contains(67) && set.contains(1)) System.out.println("YES");
+            if (set.contains(67)) System.out.println("YES");
             else  System.out.println("NO");
         }
     }

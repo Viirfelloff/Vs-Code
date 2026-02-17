@@ -4,58 +4,31 @@ public class USACOItsMooinTimeII {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        List<Integer> arr = new ArrayList<>();
-        Map<Integer, int[]> pos = new HashMap<>();
-        Map<Integer, Integer> freq = new HashMap<>();
+        int[] arr = new int[n];
+
+        Map<Integer, List<Integer>> pos = new HashMap<>();
 
         for (int i = 0; i < n; i++) {
             int x = sc.nextInt();
-            arr.add(x);
-
-            // keep last two positions of x
-            if (!pos.containsKey(x)) {
-                pos.put(x, new int[]{-1, i});
-            } else {
-                pos.put(x, new int[]{pos.get(x)[1], i});
-            }
-
-            // update frequency of x
-            freq.put(x, freq.getOrDefault(x, 0) + 1);
+            arr[i] = x;
+            pos.computeIfAbsent(x, k -> new ArrayList<>()).add(i);
         }
-
-        // PRECOMPUTE prefix distinct counts
-        int[] prefixDistinct = new int[n];
-        Set<Integer> seen = new HashSet<>();
-        for (int i = 0; i < n; i++) {
-            seen.add(arr.get(i));
-            prefixDistinct[i] = seen.size();
-        }
-
-        // collect frequencies of all elements
-        List<Integer> occ = new ArrayList<>(new HashSet<>(freq.values()));
-        Collections.sort(occ);
-        Collections.reverse(occ);
 
         int moos = 0;
-        for (int k = 0; k < occ.size(); k++) {
-            if (!(occ.get(k) >= 2)) break;
+        Set<Integer> distinct = pos.keySet();
 
-            // pick any number with this frequency
-            int num = -1;
-            for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
-                if (entry.getValue() == occ.get(k)) {
-                    num = entry.getKey();
-                    break;
+        for (int x : distinct) {
+            int lastX = pos.get(x).get(pos.get(x).size() - 1);
+            for (int y : distinct) {
+                if (y == x) continue;
+                List<Integer> yPos = pos.get(y);
+                // Count how many occurrences of y are after lastX
+                int countAfter = 0;
+                for (int p : yPos) {
+                    if (p > lastX) countAfter++;
                 }
+                if (countAfter >= 2) moos++;
             }
-
-            int idx = pos.get(num)[0]; // second-to-last occurrence
-            if (idx <= 0) continue;
-
-            int distinctBefore = prefixDistinct[idx - 1];
-            moos += distinctBefore;
-
-            if (prefixDistinct[idx - 1] != 0 && arr.subList(0, idx).contains(num)) moos--;
         }
 
         System.out.println(moos);

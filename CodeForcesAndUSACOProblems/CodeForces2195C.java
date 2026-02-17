@@ -10,7 +10,7 @@ public class CodeForces2195C {
             Set<Integer> changedidx = new HashSet<>();
             int moves = 0;
             for (int j = 0; j < n - 1; j++) {
-                if (sequence.get(j + 1) == 7 - sequence.get(j) && !changedidx.contains(j) && !changedidx.contains(j + 1)) {
+                if ((sequence.get(j + 1) == 7 - sequence.get(j) || Objects.equals(sequence.get(j), sequence.get(j + 1))) && !changedidx.contains(j) && !changedidx.contains(j + 1)) {
                     moves++;
                     changedidx.add(j);
                     changedidx.add(j + 1);
