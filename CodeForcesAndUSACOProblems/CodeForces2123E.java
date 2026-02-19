@@ -1,18 +1,8 @@
 import java.util.*;
+import java.util.spi.LocaleServiceProvider;
+
 public class CodeForces2123E {
     public static void main(String[] args) {
-        //your apporoach is completely incorrect and horribly implemented.
-        //kill yourself
-        //anyways how we should think about it is, for each element, store the possible Ks.
-        //create a map of the upper bound of k that you can afford per element
-        //precompute an array that stores the result as a result of this.
-        //then access that array for each k and print result.
-        //how do we store the possible k's?
-        //for each element to become the mex, we need all the elements before
-        //as well as removing that element
-        //anything otherwise and also duplicates of contributing elements are buffers.
-        //the remove count plus buffers is the max K you can afford.
-        //IMPLEMENT 2/17.
         Scanner sc =  new Scanner(System.in);
         int t = sc.nextInt();
         for (int i = 0; i < t; i++) {
@@ -24,43 +14,57 @@ public class CodeForces2123E {
                 freq.put(x, freq.getOrDefault(x, 0) + 1);
                 list.add(x);
             }
-            int curMex = getMex(list);
-            Collections.sort(list);
-            Set<Integer> set = new HashSet<>(list);
-            int buffers = 0;
-            int contribute = 0;
-            for (int x : list) {
-                if (x < curMex) {
-                    contribute++;
-                }
-            }
-            for (int x : set) {
-                if (x < curMex) {
-                    buffers += freq.get(x) - 1;
-                }
-            }
-            buffers += n - contribute;
-            Map<Integer, Integer> toremoveformex = new HashMap<>();
-            for (int j = 0; j < n; j++) {
-                if (list.get(j) < curMex) {
-                    if (list.get(j) == 0) {
-                        toremoveformex.put(list.get(j), freq.get(list.get(j)));
-                    } else toremoveformex.put(list.get(j), freq.get(list.get(j)));
-                }
-            }
-            for (int k = 0; k <= n; k++) {
-                if (k == 0 || k == n) System.out.print(1 + " ");
-                else {
-                    int mex = 0;
-                    int inc = 0;
-                    for (int x : set) {
-                        if (x < curMex) if (k >= toremoveformex.get(x) && (buffers) >= k - toremoveformex.get(x)) mex++;
+            if (n == 1) {
+                System.out.print(1 + " " + 1);
+                System.out.println();
+            } else {
+                Collections.sort(list);
+                int mex = getMex(list);
+                if (mex == 0) {
+                    for (int k = 0; k <= n; k++) System.out.print(1 + " ");
+                    System.out.println();
+                } else {
+                    List<Integer> newlist = new ArrayList<>();
+                    for (int j = 0; j < n; j++) {
+                        if (list.get(j) < mex) newlist.add(list.get(j));
                     }
-                    if (buffers >= k) mex++;
-                    System.out.print(mex + " ");
+                    Collections.sort(newlist);
+                    Map<Integer, Integer> externalbuffers = new HashMap<>();
+                    for (int j = 0; j < newlist.size(); j++) {
+                        externalbuffers.put(newlist.get(j), n - (j + 1));
+                    }
+                    List<Integer> buffers = new ArrayList<>();
+                    Set<Integer> seen = new HashSet<>();
+                    int curbuffer = 0;
+                    for (int j = 0; j < newlist.size(); j++) {
+                        if (!seen.contains(newlist.get(j)) && !seen.isEmpty()) {
+                            curbuffer += freq.get(newlist.get(j - 1)) - 1;
+                        }
+                        seen.add(newlist.get(j));
+                        buffers.add(curbuffer);
+                    }
+                    Map<Integer, int[]> minmax = new HashMap<>();
+                    for (int j = 0; j < newlist.size(); j++) {
+                        minmax.put(newlist.get(j), new int[]{freq.get(newlist.get(j)), freq.get(newlist.get(j)) + buffers.get(j) + externalbuffers.get(newlist.get(j))});
+                    }
+                    minmax.put(mex, new int[]{0, buffers.get(buffers.size() - 1) + freq.get(newlist.get(newlist.size() - 1)) - 1 + externalbuffers.get(newlist.get(newlist.size() - 1))});
+                    int[] diff = new int[n + 2];
+                    for (int[] range : minmax.values()) {
+                        diff[range[0]] += 1;
+                        diff[range[1] + 1] -= 1;
+                    }
+                    int[] ktoans = new int[n + 1];
+                    int cur = 0;
+                    for (int k = 0; k <= n; k++) {
+                        cur += diff[k];
+                        ktoans[k] = cur;
+                    }
+                    for (int k = 0; k <= n; k++) {
+                        System.out.print(ktoans[k] + " ");
+                    }
+                    System.out.println();
                 }
             }
-            System.out.println();
         }
     }
     public static int getMex(List<Integer> list) {

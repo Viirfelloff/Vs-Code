@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+//genuinelky stroke of genius bro precomputation to the rescue LES GOOOO
 public class CodeForces2151C {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
