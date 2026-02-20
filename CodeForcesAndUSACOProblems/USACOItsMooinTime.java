@@ -43,7 +43,7 @@ public class USACOItsMooinTime {
                             StringBuilder newsb = new StringBuilder();
                             newsb.append(mo);
                             newsb.replace(0, 1, String.valueOf(c));
-                            moo.add(newsb.toString());
+                            if (ismoo(newsb.toString())) moo.add(newsb.toString());
                         }
                     }
                 }
@@ -91,8 +91,13 @@ public class USACOItsMooinTime {
                                 StringBuilder sb = new StringBuilder();
                                 sb.append(moo);
                                 sb.replace(j,j + 1, String.valueOf(c));
-                                if (nonmoos.containsKey(sb.toString())) {
-                                    Set<Integer> firstidx = nonmoos.get(sb.toString());
+                                if (nonmoos.containsKey(sb.toString()) || moos.containsKey(sb.toString())) {
+                                    Set<Integer> firstidx;
+                                    if (nonmoos.containsKey(sb.toString())) {
+                                        firstidx = nonmoos.get(sb.toString());
+                                    } else {
+                                        firstidx = moos.get(sb.toString());
+                                    }
                                     for (int k : firstidx) {
                                         int idx = k + j;
                                         Set<Integer> fidx = moos.get(moo);
