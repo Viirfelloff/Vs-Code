@@ -1,63 +1,56 @@
 import java.io.*;
 import java.util.*;
-
 public class USACOContest2P2 {
     public static void main(String[] args) {
-        Kattio k = new Kattio(System.in);
-        int n = k.nextInt();
-        int kk = k.nextInt();
-
-        Map<String, Integer> occ = new HashMap<>();
-        for (int i = 0; i < kk; i++) {
-            int x = k.nextInt() - 1;
-            int y = k.nextInt() - 1;
-            int z = k.nextInt() - 1;
-            String key = x + "," + y + "," + z;
+        Kattio sc = new Kattio(System.in);
+        int nn = sc.nextInt();
+        int k = sc.nextInt();
+        Map<List<Integer>, Integer> occ = new HashMap<>();
+        for (int i = 0; i < k; i++) {
+            int x = sc.nextInt() - 1;
+            int y = sc.nextInt() - 1;
+            int z = sc.nextInt() - 1;
+            //String key = x + "," + y + "," + z;
+            List<Integer> key = Arrays.asList(x,y,z);
             occ.put(key, occ.getOrDefault(key, 0) + 1);
         }
-
-        int size = occ.size();
-        int[] xarr = new int[size];
-        int[] yarr = new int[size];
-        int[] zarr = new int[size];
-        int[] counts = new int[size];
-        int p = 0;
-        for (String key : occ.keySet()) {
-            String[] parts = key.split(",");
-            xarr[p] = Integer.parseInt(parts[0]);
-            yarr[p] = Integer.parseInt(parts[1]);
-            zarr[p] = Integer.parseInt(parts[2]);
-            counts[p] = occ.get(key);
-            p++;
+        List<int[]> triples = new ArrayList<>();
+        List<Integer> weights = new ArrayList<>();
+        for (Map.Entry<List<Integer>, Integer> entry : occ.entrySet()) {
+            List<Integer> s = entry.getKey();
+            triples.add(new int[]{s.get(0), s.get(1), s.get(2)});
+            weights.add(entry.getValue());
         }
-        int maxScore = -1;
         int ways = 0;
-        double limit = Math.pow(2,n);
-        for (int i = 0; i < limit; i++) {
-            String board = Integer.toBinaryString(i);
-            StringBuilder zeroes = new StringBuilder();
-            zeroes.append(board);
-            int diff = n - board.length();
-            zeroes.append("0".repeat(Math.max(0, diff)));
-            board = zeroes.toString();
-            int curscore = 0;
-            for (int j = 0; j < size; j++) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(board.charAt(xarr[j]));
-                sb.append(board.charAt(yarr[j]));
-                sb.append(board.charAt(zarr[j]));
-                if (sb.toString().equals("MOO")) {
-                    curscore += counts[j];
-                }
+        int max = -1;
+        for (int i = 0; i < 1<<nn; i++) {
+            String mask = Integer.toBinaryString(i);
+            int n = mask.length();
+            int score = 0;
+            for (int j = 0; j < triples.size(); j++) {
+                int[] key = triples.get(j);
+                int weight = weights.get(j);
+                int idx1 = n - key[0] - 1;
+                int idx2 = n - key[1] - 1;
+                int idx3 = n - key[2] - 1;
+                char c1 = ' ';
+                char c2 = ' ';
+                char c3 = ' ';
+                if (idx1 < 0) c1 = 'O';
+                else c1 = mask.charAt(idx1) == '0' ? 'O' : 'M';
+                if (idx2 < 0) c2 = 'O';
+                else c2 = mask.charAt(idx2) == '0' ? 'O' : 'M';
+                if (idx3 < 0) c3 = 'O';
+                else c3 = mask.charAt(idx3) == '0' ? 'O' : 'M';
+                if (c1 == 'M' && c2 == 'O' && c3 == 'O') score += weight;
             }
-            if (curscore > maxScore) {
-                maxScore = curscore;
+            if (score > max) {
+                max = score;
                 ways = 1;
-            } else if (curscore == maxScore) {
-                ways++;
             }
+            else if (score == max) ways++;
         }
-        System.out.println(maxScore + " " + ways);
+        System.out.println(max + " " + ways);
     }
     static class Kattio extends PrintWriter {
         private StringTokenizer st;

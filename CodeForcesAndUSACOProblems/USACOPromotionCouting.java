@@ -1,5 +1,3 @@
-package CodeForcesAndUSACOProblems;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -43,8 +41,8 @@ public class USACOPromotionCouting {
         ranks.add(plat);
         int inc = 0;
         for (List<Integer> quers : ranks) {
-            int start = quers.getFirst();
-            int end = quers.getLast();
+            int start = quers.get(0);
+            int end = quers.get(quers.size() - 1);
             if (inc == 1) {
                 btos += end - start;
             }
@@ -59,8 +57,8 @@ public class USACOPromotionCouting {
             }
             inc++;
         }
-        System.out.println(btos);
-        System.out.println(stog);
-        System.out.println(gtopl);
+        pr.println(btos);
+        pr.println(stog);
+        pr.println(gtopl);
     }
 }
