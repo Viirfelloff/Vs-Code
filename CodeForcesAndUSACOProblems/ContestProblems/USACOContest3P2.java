@@ -3,6 +3,8 @@ import java.util.*;
 
 public class USACOContest3P2 {
     public static void main(String[] args) throws IOException {
+        //todo - fix where you apply the mod.
+        //todo - also, precompute powers of 2 to avoid int overflow.
         Kattio sc = new Kattio(System.in);
         long mod = 1000000007;
         int t = sc.nextInt();
