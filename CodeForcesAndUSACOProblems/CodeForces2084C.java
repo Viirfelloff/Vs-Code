@@ -37,10 +37,11 @@ public class CodeForces2084C {
             else {
                 List<Integer> left = new ArrayList<>(a);
                 Collections.sort(left);
+                int pointer = 0;
                 Set<Integer> fixed = new HashSet<>();
                 List<int[]> ops = new ArrayList<>();
                 for (int j = 0; j < n; j++) {
-                    int tofix = left.get(0);
+                    int tofix = left.get(pointer);
                     if (valtoidxa.get(tofix) != n - valtoidxa.get(tofix) - 1 && !Objects.equals(valtoidxb.get(tofix), valtoidxa.get(tofix))) {
                         boolean movea = true;
                         boolean moveb = true;
@@ -89,7 +90,7 @@ public class CodeForces2084C {
                     else if (Objects.equals(valtoidxb.get(tofix), valtoidxa.get(tofix))) {
                         left.add(tofix);
                     }
-                    left.remove(0);
+                    pointer++;
                 }
                 boolean val = true;
                 for (int j = 1; j <= n; j++) {
@@ -110,8 +111,8 @@ public class CodeForces2084C {
                     }
                 }
             }
-            pr.close();
         }
+        pr.close();
     }
     static class FastReader {
         BufferedReader br;
